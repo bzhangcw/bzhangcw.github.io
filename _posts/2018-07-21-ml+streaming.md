@@ -9,23 +9,21 @@ categories: coding
 - [主流程](#%E4%B8%BB%E6%B5%81%E7%A8%8B)
   - [预处理: Kafka + Spark Streaming](#%E9%A2%84%E5%A4%84%E7%90%86-%08kafka--spark-streaming)
   - [执行预测: 请求模型服务](#%E6%89%A7%E8%A1%8C%E9%A2%84%E6%B5%8B-%E8%AF%B7%E6%B1%82%E6%A8%A1%E5%9E%8B%E6%9C%8D%E5%8A%A1)
-- [TODO](#todo)
-  - [stateless => stateful](#stateless--stateful)
 
 ## Background
 
-今年初做模型时第一次接触到DL, 咬牙抛弃了Keras之类的“高级”API ( I do like its slogan), 从0开始上TensorFlow, 也算是入了CV的坑。除去使用和学习 (fork) Google的代码带来的巨大提升，期间部署服务，制作管理docker镜像，推动运维部门做k8s服务都带来了极大收获。
+今年初做模型时第一次接触到DL, 咬牙抛弃了Keras之类的“高级”API, 从0开始上TensorFlow, 也算是入了CV的坑。除去使用和学习 (fork) Google的代码带来的巨大提升，期间部署服务，制作管理docker镜像，推动运维部门做k8s服务都带来了极大收获。
 
 另一方面，之前已经对 Spark 2.0 有了一定了解, 利用一些内置的功能跑着日常的挖掘工作 (human learning). 很自然，想到了把TF扔在Spark里跑的点子，挥之不去。初步研究有两种做法：
 
 a. 原汁原味地打包TF环境并配好分布式应用需要的环境。
 
-b. 将模型做成gRPC服务在Spark job中请求 [ TensorFlow-serving 号称可跑MR job，未亲测 ]
+b. 将模型做成gRPC服务在Spark job中请求 [ TensorFlow-serving 号称可跑MR job，亲测可用 ]
 
 最后踩通a. 仍不满意。由于需要TF的模块实际上在处理大批堆积起来的离线日志，跑起来代价还是很大。很自然想到之前听说的流式计算大法，据传主流有Akka/Kafka. 看到空闲的数台大内存服务器按捺不住。考量之下, 为了和同事一起 (帮我debug), 放弃 Scala 向的 Akka, 采用 Kafka + Spark Streaming, 如此试水之旅开始.
 
 初步研究, 大概需要做如下几个方面的事情: 
-- 任务 `task`: streaming 实时处理 (Spark + Kafka), 设计模型预测 (TF + gRPC), 中间数据序列化 (最好跨平台 => protobuf) 存储 (MySQL/Hbase/Redis/...)
+- 任务 `task`: streaming 实时处理 (Spark + Kafka), 设计模型预测 (TF + gRPC), 中间数据序列化 (最好跨平台 => protobuf) 存储 (MySQL/Hbase/Redis/...) 可能需要的中间件 (Redis)
 - 设计的流程 `pipeline`:
     - 主流程 main: 通过Kakfa实时处理"源"topic `s0` => 推到预处理后的topic `s1` => 推到模型的RPC Service 获得预测结果 => 推到结果(inference) topic `s2` 
     - 存储: `s2` => 数据库等...
@@ -40,7 +38,7 @@ b. 将模型做成gRPC服务在Spark job中请求 [ TensorFlow-serving 号称可
  
 处理方式因数据是否有无状态分为两种. 比较简单的是无状态数据 (stateless), 因为数据之间没有依赖, 没有开始及结束, 每条数据的处理方法都一样. 
 
-有状态 (stateful) 麻烦一点. 比如, 假设我们要根据用户在网页访问的 session 来设计模型, 理想条件下我们需要等待用户结束 session 后才能计算. 当然也可以根据 key-value 结构进行离线处理, 设定滑动时间窗“模拟”, 但都没有实现 ["stateful streaming"](https://databricks.com/session/deep-dive-into-stateful-stream-processing-in-structured-streaming) (除了 spark streaming, Akka 也有类似现成的机制). 本来想把系统做成 stateful, 但坑也没有踩通. 暂且用 stateless. 基本的代码如下:
+有状态 (stateful) 麻烦一点. 比如, 假设我们要根据用户在网页访问的 session 来设计模型, 理想条件下我们需要等待用户结束 session 后才能计算. 当然也可以根据 key-value 结构进行离线处理, 设定滑动时间窗“模拟”, 但都没有实现 ["stateful streaming"](https://databricks.com/session/deep-dive-into-stateful-stream-processing-in-structured-streaming) (除了 spark streaming, Akka 也有类似现成的机制). 本来想把系统做成 stateful, 但坑也没有踩通. 暂且用 stateless. (update: 用Redis做缓存做了一个基本stateful) 基本的代码如下:
 
 ```scala
 val TOPIC = "1231"
@@ -169,7 +167,7 @@ pip install kafka-python==1.4
 
 TensorFlow serving 需要一个 gRPC client, 这里可以参见tensorflow 的官方教程走一遍流程. 设计模型 => 训练 => export (SavedModel) => tensorflow serving, 一言难尽, 此处略过...=> 快进: 假设我们已经有这样一个server.
 
-如果进行预测的服务采用 python语言，可以直接使用tensorflow的官方API [tensorflow-serving API](https://github.com/tensorflow/serving). 当然 gRPC 本身可以用其他语言发起请求，客户端完全可以写成 Scala/Python/C++，只需要编译protobuf即可。
+如果进行预测的服务采用 python语言，可以直接使用tensorflow的官方API [tensorflow-serving API](https://github.com/tensorflow/serving). 当然 gRPC 本身可以用其他语言发起请求，客户端完全可以写成 Scala/Python/C++，只需要编译tensorflow/tf-serving 对应的protobuf即可。
 这里我加上了 PySpark (Spark Python) 读取Kafka topic@`s1`, 便于在 Spark 集群中执行 gRPC request, 然后推送到新的结果topic@`s2`, 大致需要如下的模块:
 
 ```python
@@ -275,10 +273,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
-```
-
-pyspark 缺少大部分的 python 运行环境，一种做法试打包 conda/virtualenv 环境（配好你的依赖），执行 spark 任务时上传依赖并附加软链。可以参考hortonworks提供的[教程](https://community.hortonworks.com/articles/58418/running-pyspark-with-conda-env.html)
-
-## TODO
-
-### stateless => stateful
+``` 
