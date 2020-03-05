@@ -1,6 +1,18 @@
 ---
-# You don't need to edit this file, it's empty on purpose.
-# Edit theme's home layout instead if you wanna make some changes
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: home
+layout: index
+title: "Brentian.io"
+subtitle: Brentian C. Zhang
 ---
+
+Periodical review of my work.
+
+
+{% capture numposts %}{{ site.posts | size }}{% endcapture %}
+{% if numposts != '0' %}
+## Posts by Year
+
+{% for post in site.posts %}{% assign currentyear = post.date | date: "%Y" %}{% if currentyear != prevyear %}
+### {{ currentyear }}
+{% assign prevyear = currentyear %}{% endif %} - [{{ post.title }}]({{ site.baseurl }}{{ post.url }}) - {{ post.date | date: '%B %-d' }}
+{% endfor %}
+{% endif %}

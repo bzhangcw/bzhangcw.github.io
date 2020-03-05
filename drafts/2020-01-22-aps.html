@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="brentian" />
+  <title>OR-0: the AP problem</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../doc/tufte.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+   var mathElements = document.getElementsByClassName("math");
+   for (var i = 0; i < mathElements.length; i++) {
+    var texText = mathElements[i].firstChild;
+    if (mathElements[i].tagName == "SPAN") {
+     katex.render(texText.data, mathElements[i], {
+      displayMode: mathElements[i].classList.contains('display'),
+      throwOnError: false,
+      fleqn: false
+     });
+  }}});
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">OR-0: the AP problem</h1>
+<p class="subtitle">Some thoughts on S&amp;OP, AP systems.</p>
+<p class="author">brentian</p>
+<p class="date">2020-01-22 21:45</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#the-discrete-model">The Discrete Model</a>
+<ul>
+<li><a href="#notation">Notation</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</nav>
+<h1 id="abstract">Abstract</h1>
+<p>Seek to explore the computability of planning models in continuous production.</p>
+<h1 id="intro">Intro</h1>
+<p>A production planning problem considers processing items on machines in time horizon <span class="math inline">\mathbf{T}</span>. An operation plan (or schedule) should be made to satisfy orders in time. This problem is critical in supply chain management, and it has traditionally been divided into multiple parts, including S&amp;OP, AP (aggregate planning), MRP, and scheduling at the lowest level. None of these above can provide a comprehensive solution to production plan, inventory and delivery.</p>
+<p>In 2016, I worked with Texas Instrument on a project to reduce WIP levels in their semi-conductor facilities, see <span class="citation" data-cites="zhang2017controlling">Zhang et al. (2017)</span>. The precise scope of the project lies between MRP and AP, as it focuses on materials production, and inventory levels. Later in 2019 I worked with a large ICT company on an enormous planning problem, which considers over 100,000 products with complex BOM in a planning horizon over 3 months. The project should provide the company with an integrated plan on inventory, order delivery, production, procurement, out-sourcing, and so on, which makes it encloses S&amp;OP, AP, and even procurement plans.</p>
+<p>It seems that supply chain operations has discarded the methodology defined by traditional management tools. To translate strategic plan into operations, we nowadays prefer to consider what has been treated separately as a whole. It is partly the comes from the development and success of large-scale mathematical programming.</p>
+<p>The keyword is computability. In the TI project, most instances define weekly plans, and can be solved within 3,600s by open-source linear optimizer <em>CLP</em>. For the project I did in 2019, we use LP models with over 1 billion decision variables, the computation time goes up to 3~4 hours. But they are all linear optimization models. Using LP means you cannot have integer variable, disjunctive constraints, SOS, and so on, which prevents you from modeling operation rules <strong>precisely</strong>. At the same time, fractional solutions are not acceptable for many cases, and you will need a good rounding heuristic to play with the integer issues. Generally, extra efforts should be placed on LP-specific constraints, systematic tuned hyper-parameters, and the designed solving procedure since you cannot model prioritized “multi-objective” requirements in LP.</p>
+<p>Compared to <a href="https://en.wikipedia.org/wiki/Continuous_production">continuous production</a>, discrete manufacturers would like to pay more attention on using models to solve production planning problems, especially for industries like semi-conductor, ICT, mobile phones and so on. The reasons could still be the problem of computability. For discrete production, one usually wants to minimize inventory levels to achieve Just-in-Time style solutions. The ideal way is to model the production problem by using time-indexed variables; the description of constraints seems to be quite straightforward. It looks like lot-sizing, assignment, and network flows, and can be solved by LP; at least a fractional amount of production makes some sense. You can find detailed reference from Wolsey’s planning book<span><label for="sn-0" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-0" class="margin-toggle"/><span class="sidenote"><span class="citation" data-cites="pochet2006production">Pochet and Wolsey (2006)</span><br />
+<br />
+</span></span>. Furthermore, a time-indexed model tends to produce very discrete solutions. A production plan would not be continuous, which is not acceptable in continuous production. The continuous companies would like to minimize setup costs and to keep running the same production, and this goal somehow contradicts the nature of time-indexed models. In this case many rules and descriptions of the problem require MILP-like constraints like routing of jobs, processing time of items and so on. This makes the problem similar to JSP and thus NP-hard.</p>
+<h1 id="the-discrete-model">The Discrete Model</h1>
+<p>Generally, the goal of a planning systems is to find a solution to plan for production, and ultimately to reduce delivery insufficiency. It can be summarized from high to low by priority: a. minimize production shortage, b. minimize inventory, c. minimize production cost, setup cost, etc.</p>
+<h2 id="notation">Notation</h2>
+<p>We use the following notations.</p>
+<ul>
+<li>set of items: <span class="math inline">\mathbf{I} = \{1, 2, ..., N\}</span></li>
+<li>set of machines: <span class="math inline">\mathbf{M} = \{1, ..., m, ...,M \}</span></li>
+<li>demand/order: <span class="math inline">d_{it}</span></li>
+<li>lead time: <span class="math inline">l_i</span></li>
+<li>suppose there exists resource restrictions on machine <span class="math inline">r_{m}</span></li>
+<li>parents: <span class="math inline">J_{i}</span>, a group of items use i$ as components with rate <span class="math inline">u_{ij}</span></li>
+</ul>
+<p>Decision:</p>
+<ul>
+<li>production: <span class="math inline">x_{it}</span></li>
+<li>delivery: <span class="math inline">s_{it}</span></li>
+</ul>
+<p>A MILP/LP model can be defined as follows: <span class="math inline">t&#39;</span> defines the start time of production that finishes @<span class="math inline">t</span></p>
+<p><span class="math display">\begin{aligned}
+  N_{i,t} + D_{i, t} - \sum_{j\in J_i} u_{ij} X_{j, t}= N_{i,t-1} + X_{i, t&#39;}, t&#39; \le t\\
+\end{aligned}</span></p>
+<p>This above constraint is usually defined as <strong><em>flow</em></strong>, i.e., how items are produced and the inventory flows into the whole system. For discrete system, the flow actually follows the BOM<span><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">bill-of-material<br />
+<br />
+</span></span>, which are generally a group of trees.</p>
+<p>For continuous production, an item is built from a set of operations; for each item <span class="math inline">i</span>, the building procedure can be represented as a directed acyclic graph <span class="math inline">G_i = \mathcal{G}(O_i, E_i)</span>, where <span class="math inline">O_i \subseteq O</span> is the needed operations each of which has to be processed on one of the machines, <span class="math inline">E_i</span> is the set of directed edges defining precedences. The lead-time here is defined from the processing time by matrix <span class="math inline">P_i = \{p_{om}\}</span>, where <span class="math inline">p_{om}</span> is the time to finish <span class="math inline">o</span> on machine <span class="math inline">m</span>. We will talk about this in the next section.</p>
+<h1 class="unnumbered" id="references">References</h1>
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+<div id="ref-pinedo2012scheduling">
+<p>Pinedo M (2012) <em>Scheduling</em> (Springer).</p>
+</div>
+<div id="ref-pochet2006production">
+<p>Pochet Y, Wolsey LA (2006) <em>Production planning by mixed integer programming</em> (Springer Science &amp; Business Media).</p>
+</div>
+<div id="ref-zhang2017controlling">
+<p>Zhang C, Bard JF, Chacon R (2017) Controlling work in process during semiconductor assembly and test operations. <em>International Journal of Production Research</em> 55(24):7251–7275.</p>
+</div>
+</div>
+</body>
+</html>
