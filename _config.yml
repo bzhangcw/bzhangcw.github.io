@@ -22,6 +22,8 @@ pandoc:
     - from: 'markdown+tex_math_dollars'
     - filter: 'pandoc-sidenote' 
     - filter: 'pandoc-citeproc'
+    - csl: assets/or.csl
+    - bibliography: assets/bib/aps.ref.bib
 
 # HACK(jez): We have to hard code the site.baseurl here
 header_includes:
