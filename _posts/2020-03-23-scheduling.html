@@ -1,0 +1,187 @@
+---
+title: "OR-2: Parallel Machine Scheduling"
+subtitle: "."
+tags: [scheduling, OR]
+category: OR
+date: 2020-03-23 10:45
+bibliography: [minizinc.ref.bib]
+#
+layout: post
+---
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Chuwen Zhang" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+</head>
+
+<body>
+  <header id="title-block-header">
+    <p class="subtitle">Scheduling 1: first post on scheduling, introductions</p>
+  </header>
+  <nav id="TOC" role="doc-toc">
+    <ul>
+      <li><a href="#problem-terminology">Problem &amp; Terminology</a></li>
+      <li><a href="#reference">Reference</a></li>
+    </ul>
+  </nav>
+  <p>“Notes of papers and books about Scheduling.”</p>
+  <p>Useful references:</p>
+  <ul>
+    <li>Scheduling by Pinedo: <span class="citation" data-cites="pinedo2012scheduling"><a
+          href="#ref-pinedo2012scheduling" role="doc-biblioref">1</a></span>.</li>
+    <li>Reduction of problem classes: <span class="citation" data-cites="timkovsky2004reducibility"><a
+          href="#ref-timkovsky2004reducibility" role="doc-biblioref">2</a></span>.</li>
+    <li>Complexity results on scheduling, by <a
+        href="http://www2.informatik.uni-osnabrueck.de/knust/class/">Brucker</a>, “A comprehensive list of NP-hard
+      scheduling problems can be found on the website”</li>
+    <li>Quick search on “Scheduling”: (http://www-desir.lip6.fr/~durrc/query/)</li>
+  </ul>
+  <h2 id="problem-terminology">Problem &amp; Terminology</h2>
+  <p>We have the following descriptive table, reproduced from the book <span class="citation"
+      data-cites="pinedo2012scheduling"><a href="#ref-pinedo2012scheduling" role="doc-biblioref">1</a></span> Ch.2.</p>
+  <table>
+    <caption>Problem description and terminology</caption>
+    <colgroup>
+      <col style="width: 15%" />
+      <col style="width: 15%" />
+      <col style="width: 68%" />
+    </colgroup>
+    <thead>
+      <tr class="header">
+        <th style="text-align: left;"><strong>Name</strong></th>
+        <th style="text-align: left;">Notation</th>
+        <th style="text-align: left;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="odd">
+        <td style="text-align: left;">Processing time</td>
+        <td style="text-align: left;"><span class="math inline">p_{ij}</span></td>
+        <td style="text-align: left;">the processing time of job <span class="math inline">j</span> on machine <span
+            class="math inline">i</span>.</td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Release date</td>
+        <td style="text-align: left;"><span class="math inline">r_j</span></td>
+        <td style="text-align: left;">release day (earliest processing day)</td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Due date</td>
+        <td style="text-align: left;"><span class="math inline">d_j</span></td>
+        <td style="text-align: left;">order due day</td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Weight</td>
+        <td style="text-align: left;"><span class="math inline">w_j</span></td>
+        <td style="text-align: left;">usually the priority</td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Parallel</td>
+        <td style="text-align: left;"><span class="math inline">P_m</span></td>
+        <td style="text-align: left;">Identical machines in parallel</td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Parallel (Uniform)</td>
+        <td style="text-align: left;"><span class="math inline">Q_m</span></td>
+        <td style="text-align: left;">Machines in parallel with diﬀerent speeds</td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Parallel unrelated</td>
+        <td style="text-align: left;"><span class="math inline">R_m</span></td>
+        <td style="text-align: left;">Unrelated machines in parallel: There are <span class="math inline">m</span>
+          diﬀerent machines in parallel. Machine <span class="math inline">{i}</span> can process job <span
+            class="math inline">{j}</span> at speed <span class="math inline">v_{ij}</span></td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Flow shop</td>
+        <td style="text-align: left;"><span class="math inline">F_m</span></td>
+        <td style="text-align: left;">each job has to follow the <strong>same</strong> route of operations on the
+          machines</td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Flexible flow shop</td>
+        <td style="text-align: left;"><span class="math inline">FF_c</span></td>
+        <td style="text-align: left;">extension of above: - c refers to stage or workstation - each stage will have
+          multiple parallel machines</td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Job shop</td>
+        <td style="text-align: left;"><span class="math inline">J_m</span></td>
+        <td style="text-align: left;">extension of <span class="math inline">F_m</span> with <strong>different</strong>
+          routes</td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Flexible job shop</td>
+        <td style="text-align: left;"><span class="math inline">FJ_c</span></td>
+        <td style="text-align: left;">extension of <span class="math inline">J_m</span>; each stage <span
+            class="math inline">c</span> has parallel machines</td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Preemptions</td>
+        <td style="text-align: left;"><code>prmp</code> or <del>prmp</del></td>
+        <td style="text-align: left;">The scheduler is allowed to interrupt the processing of a job (preempt) at any
+          point in time and put a diﬀerent job on the machine instead</td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Precedence</td>
+        <td style="text-align: left;"><code>prec</code></td>
+        <td style="text-align: left;">graph like restriction: - chains: job has at most one predecessor and at most one
+          successor - trees: … - general Precedence</td>
+      </tr>
+      <tr class="even">
+        <td style="text-align: left;">Setup</td>
+        <td style="text-align: left;"><span class="math inline">s_{jj&#39;}</span></td>
+        <td style="text-align: left;">Sequence dependent setup times: <span class="math inline">\exist</span> a setup
+          time between process <span class="math inline">j\rightarrow j&#39;</span></td>
+      </tr>
+      <tr class="odd">
+        <td style="text-align: left;">Job families</td>
+        <td style="text-align: left;"></td>
+        <td style="text-align: left;">jobs of the same family does not incur a setup time or cost</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>In application, there are few cases for single machine problems, and the most common case are job shops, <span
+      class="math inline">J_m</span>, which is NP-hard. In this post, we talk about <strong><em>simpler</em></strong>
+    cases related to parallel machines <span class="math inline">\{P_m, Q_m, R_m\}</span>, and the problem type related
+    to <strong>prmp</strong>.</p>
+  <p>The objective of a scheduling problem, given completion time of the job <span class="math inline">C_j</span>:</p>
+  <ul>
+    <li>Lateness: <span class="math inline">L_{j}=C_{j}-d_{j}</span></li>
+    <li>Tardiness: <span class="math inline">T_{j}=\max \left(L_{j}, 0\right)</span></li>
+  </ul>
+  <p>Common objectives are:</p>
+  <ul>
+    <li>Makespan: <span class="math inline">C_{\max }</span>, The makespan is defined as <span class="math inline">\max
+        \left(C_{1}, \ldots, C_{n}\right)</span>.</li>
+    <li>Maximum Lateness: <span class="math inline">L_{\max }</span>, The maximum lateness is defined as <span
+        class="math inline">\max \left(L_{1}, \ldots, L_{n}\right)</span> .<br />
+    </li>
+    <li>Total Weighted Completion Time: <span class="math inline">\sum w_{j} C_{j}</span> The total (unweighted)
+      completion time is denoted by <span class="math inline">\sum C_{j}</span></li>
+    <li>Total Weighted Tardiness: <span class="math inline">\sum w_{j} T_{j}</span>, The total (unweighted) tardiness is
+      denoted by <span class="math inline">\sum T_{j}</span>.<br />
+    </li>
+    <li>Weighted Number of Tardy Jobs: <span class="math inline">\sum w_{j} U_{j}</span>. The total (unweighted) number
+      of tardy jobs is denoted by <span class="math inline">\sum U_{j}</span></li>
+  </ul>
+  <h2 class="unnumbered" id="reference">Reference</h2>
+  <div id="refs" class="references" role="doc-bibliography">
+    <div id="ref-pinedo2012scheduling">
+      <p>[1] M. Pinedo, <em>Scheduling</em>, vol. 5. Springer, 2012.</p>
+    </div>
+    <div id="ref-timkovsky2004reducibility">
+      <p>[2] V. Timkovsky, “Reducibility among scheduling classes, chapter 8 in handbook of scheduling: Algorithms,
+        models, and performance analysis, edited by j. YT. Leung.” Chapman &amp; Hall/CRC Computer; Information Science
+        Series, CRC Press Company, 2004.</p>
+    </div>
+  </div>
+</body>
+
+</html>
