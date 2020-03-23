@@ -1,22 +1,13 @@
 site: Brentian.io
-url: #yoururl
-title: Brentian.io
-description: Review of my work
-twitter:
-  username: brentian
-  card: summary
-  creator: brentian
-github:
-  username: brentian
-author:
-  twitter:
-  name: brentian
-  avatar:
-  email: #youremail
-  url: #yoururl
+
 permalink: pretty
 
-baseurl: ""
+email: brentian@github.com
+description: >- # this means to ignore newlines until "baseurl:"
+  brentian.io
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+github_username: brentian
 
 highlighter: none
 
