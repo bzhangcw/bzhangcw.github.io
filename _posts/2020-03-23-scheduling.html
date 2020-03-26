@@ -21,12 +21,15 @@ layout: post
 </head>
 
 <body>
-  <header id="title-block-header">
-    <p class="subtitle">Scheduling 1: first post on scheduling, introductions</p>
-  </header>
   <nav id="TOC" role="doc-toc">
     <ul>
       <li><a href="#problem-terminology">Problem &amp; Terminology</a></li>
+      <li><a href="#selected-classical-parallel-problems">(Selected) Classical Parallel Problems</a></li>
+      <li><a href="#appendix-details-of-the-problem">Appendix, Details of the Problem</a>
+        <ul>
+          <li><a href="#a.-the-parallel-preemptive-problem">a. The Parallel Preemptive Problem</a></li>
+        </ul>
+      </li>
       <li><a href="#reference">Reference</a></li>
     </ul>
   </nav>
@@ -40,7 +43,7 @@ layout: post
     <li>Complexity results on scheduling, by <a
         href="http://www2.informatik.uni-osnabrueck.de/knust/class/">Brucker</a>, “A comprehensive list of NP-hard
       scheduling problems can be found on the website”</li>
-    <li>Quick search on “Scheduling”: (http://www-desir.lip6.fr/~durrc/query/)</li>
+    <li>Quick search on classes of <a href="http://www-desir.lip6.fr/~durrc/query/">“Scheduling”</a></li>
   </ul>
   <h2 id="problem-terminology">Problem &amp; Terminology</h2>
   <p>We have the following descriptive table, reproduced from the book <span class="citation"
@@ -171,6 +174,143 @@ layout: post
     <li>Weighted Number of Tardy Jobs: <span class="math inline">\sum w_{j} U_{j}</span>. The total (unweighted) number
       of tardy jobs is denoted by <span class="math inline">\sum U_{j}</span></li>
   </ul>
+  <p>One could easily refer to the complexity <a
+      href="http://www2.informatik.uni-osnabrueck.de/knust/class/dateien/allResults.pdf">conclusion</a> by Brucker.</p>
+  <p>As for parallel machine problems, problems with preemption is <strong>no harder than</strong> those without
+    preemptions.</p>
+  <h2 id="selected-classical-parallel-problems">(Selected) Classical Parallel Problems</h2>
+  <p>There are some properties in the parallel problems that interest me most. From my professional experience, the
+    scheduling problems in the real world are usually very complex. Most planning or scheduling problems somehow
+    integrate with considerations on demand satisfaction, material procurement that are traditionally treated in the
+    “S&amp;OP” or higher-level decision-making process (to converge on some sort of global optimality). In that sense,
+    <strong>tardiness</strong> might be a better choice than <strong>makespan</strong>. I list a few properties I wish
+    to explore:</p>
+  <ul>
+    <li><strong>uniform</strong> machines, which has a fix processing speed <span class="math inline">s_i, \forall
+        i</span></li>
+    <li>or <strong>unrelated</strong> machines, which has different processing time <span
+        class="math inline">p_{ij}</span> either from machine to machine or job to job.</li>
+    <li>job with <strong>precedence</strong>, DAG, chains, or trees</li>
+    <li>release &amp; due dates</li>
+    <li>objectives involving <strong>demand</strong> satisfaction</li>
+  </ul>
+  <p>This naturally brings out a list of <strong>classical</strong> problems.</p>
+  <ul>
+    <li><a href="#a-the-parallel-preemptive-problem">Appendix A</a>: R, preemptive, release, due
+      <ol type="1">
+        <li>formally <span class="math inline">( R \; \big | \; p_{ij}, \text{pmtn}, r_i \big | L_{max})</span>, based
+          on <span class="citation" data-cites="Lawler1978"><a href="#ref-Lawler1978" role="doc-biblioref">3</a></span>.
+        </li>
+        <li>The job <span class="math inline">j</span> can only be processed at one machine <span
+            class="math inline">i</span> at a time</li>
+        <li>This problem has no precedence constraint, using a LP formulation and a post-processing algorithm to get the
+          schedule.</li>
+      </ol>
+      Extensions:
+      <ul>
+        <li>
+          <ol type="i">
+            <li>Deadline constraint, see <span class="citation" data-cites="Sourd2001"><a href="#ref-Sourd2001"
+                  role="doc-biblioref">4</a></span></li>
+          </ol>
+        </li>
+        <li>
+          <ol start="2" type="i">
+            <li><strong>Relax</strong> restriction 2, i.e., <a href="#extension-multi-processing">multi-processing</a>
+            </li>
+          </ol>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <h2 id="appendix-details-of-the-problem">Appendix, Details of the Problem</h2>
+  <h3 id="a.-the-parallel-preemptive-problem">a. The Parallel Preemptive Problem</h3>
+  <p>This problem is studied in 1978, see <span class="citation" data-cites="Lawler1978"><a href="#ref-Lawler1978"
+        role="doc-biblioref">3</a></span>.</p>
+  <p>Formally:</p>
+  <p><span class="math display">( R \; \big | \; p_{ij}, \text{pmtn}, r_i \big | L_{max})</span></p>
+  <ul>
+    <li><span class="math inline">\alpha</span> := <span class="math inline">R</span>, means we have unrelated machines
+    </li>
+    <li><span class="math inline">\beta</span> := <span class="math inline">(p_{ij}, \text{pmtn}, r_i)</span></li>
+  </ul>
+  <p>The linear programming formulation of minimizing <span class="math inline">C_{max}</span> in the paper is as
+    follows. <span class="math display">
+      \begin{aligned}
+      \text { minimize } &amp; C_{\max } \\
+      \text { s.t. } &amp; :\\
+      &amp;\sum_{i=1}^{m} \frac{t_{i j}}{p_{i j}} =1, \quad j=1,2, \ldots, n \\
+      &amp;\sum_{i=1}^{m} t_{i j} \leq C_{\max }, j=1,2, \ldots, n \\
+      &amp;\sum_{j=1}^{n} t_{i j} \leq C_{\max }, i=1,2, \ldots, m\\
+      &amp;t_{i j} \geq 0 \end{aligned}</span></p>
+  <p>where <span class="math inline">t_{ij}</span> is the total amount of time that processor <span
+      class="math inline">i</span> works on job <span class="math inline">j</span>.</p>
+  <p>A feasible schedule can be found by the <strong><em>decrementing set algorithm</em></strong>.</p>
+  <h4 id="decrementing-set-algorithm">Decrementing Set Algorithm</h4>
+  <p>We can the use algorithm below to construct a schedule, let T be the value of decision <span class="math inline">T
+      = (t_{ij})</span></p>
+  <ol type="1">
+    <li>find a value <span class="math inline">\delta</span>, update partial schedule of <span
+        class="math inline">\delta</span> with <span class="math inline">C&#39;_{max} = C_{max} - \delta</span></li>
+    <li>find the <strong>decrementing set</strong> <span class="math inline">S^k</span> of card <span
+        class="math inline">m</span> (size of machines) by <strong>tight</strong> rows and columns.<br />
+    </li>
+    <li>update <span class="math inline">T^{k+1}</span> from <span class="math inline">T^{k}</span> from the set <span
+        class="math inline">S^k</span></li>
+  </ol>
+  <p>the example mentioned in the paper:</p>
+  <ul>
+    <li>iteration 0, <span class="math inline">\delta = 4</span>, <span class="math inline">S</span> and underlined
+      numbers</li>
+  </ul>
+  <p><span class="math inline">T=\left(\begin{array}{llll}3 &amp; \underline{4} &amp; 0 &amp; 4 \\ \underline{4} &amp; 0
+      &amp; 6 &amp; 0 \\ 4 &amp; 0 &amp; 0 &amp; \underline{6}\end{array}\right)</span>, <span
+      class="math inline">T^1=\left(\begin{array}{llll}\underline{3} &amp; 0 &amp; 0 &amp; 4 \\ 0 &amp; 0 &amp;
+      \underline{6} &amp; 0 \\ 4 &amp; 0 &amp; 0 &amp; \underline{2}\end{array}\right)</span> with partial schedule:
+    <span class="math inline">\begin{pmatrix}2 \times 4\\1\times 4\\4\times 4\end{pmatrix}</span></p>
+  <ul>
+    <li>iteration 1, start with tight row 1 of <span class="math inline">T^1</span>, <span class="math inline">\delta =
+        3</span></li>
+  </ul>
+  <p><span class="math inline">T^2=\left(\begin{array}{llll}0 &amp; 0 &amp; 0 &amp; \underline{4} \\ 0 &amp; 0 &amp;
+      \underline{3} &amp; 0 \\ \underline{4} &amp; 0 &amp; 0 &amp; 0\end{array}\right)</span>, with partial schedule:
+    <span class="math inline">\begin{pmatrix}1 \times 3\\3\times 3\\4\times 2 + idle \times 1\end{pmatrix}</span></p>
+  <ul>
+    <li>iteration 2, start with tight row 1, <span class="math inline">\delta = 4</span>,</li>
+  </ul>
+  <p><span class="math inline">T^3=\left(\begin{array}{llll}0 &amp; 0 &amp; 0 &amp; \underline{0} \\ 0 &amp; 0 &amp;
+      \underline{0} &amp; 0 \\ \underline{0}&amp; 0 &amp; 0 &amp; 0 \end{array}\right )</span>, with partial schedule:
+    <span class="math inline">\begin{pmatrix}4 \times 4\\3\times 3 + idle \times 1\\1\times 4 \end{pmatrix}</span></p>
+  <p>… the final schedule is then:</p>
+  <p><img src="/assets/img/full_schedule.0.png" /></p>
+  <h4 id="the-minimum-max-lateness-objective">The Minimum Max-Lateness Objective</h4>
+  <p>For the <span class="math inline">L_{max}</span> objective, assume <span class="math inline">d_1 \le d_2 \le ...
+      \le d_n</span>. <span class="math inline">t_{ij}^k</span> is the total amount of time that processor <span
+      class="math inline">i</span> works on job <span class="math inline">j</span> at the time period <span
+      class="math inline">[d_{k-1}+L_{max}, d_{k}+L_{max}]</span>.</p>
+  <p><span class="math display">\begin{aligned}
+      \text { minimize } &amp; L_{\max } \\
+      \text { s.t. } &amp; :\\
+      &amp;\sum_{i=1}^{m}\sum_{k=1}^{n} \frac{t_{i j}^{(k)}}{p_{ij}}=1, \quad j=1,2, \ldots, n \\
+      &amp;\sum_{j=1}^{n} t_{i j}^{(1)} \leq d_{1}+L_{\max }, \quad i=1,2, \ldots, m \\
+      &amp;\sum_{i=1}^{m} t_{i j}^{(1)} \leq d_{1}+L_{\max }, \quad j=1,2, \ldots, n \\
+      &amp;\sum_{i=1}^{m} t_{i j}^{(k)} \leq d_{k}-d_{k-1}, \quad j=k, k+1, \ldots, n;\; k=2,3, \ldots, n \\
+      &amp;\sum_{j=k}^{n} t_{i j}^{(k)} \leq d_{k}-d_{k-1}, \quad i=1,2, \ldots, m, \quad k=2,3, \ldots, n \\
+      &amp;\quad t_{i j}^{(k)} \geq 0 \end{aligned}</span></p>
+  <h4 id="bounds-for-the-preemption">Bounds for the preemption</h4>
+  <p><span class="citation" data-cites="Lawler1978"><a href="#ref-Lawler1978" role="doc-biblioref">3</a></span> states
+    any solution to the above problem yields a feasible schedule, and the number of preemptions <span
+      class="math inline">p(m, k)</span> can be quadratically bounded by the equation below:</p>
+  <p><span class="math display">2(m-1) n+\sum_{k=1}^{n} p(m, k) \leq O\left(m^{2} n\right)</span></p>
+  <h4 id="extension-multi-processing">Extension: multi-processing</h4>
+  <p>We have the following formulation:</p>
+  <p><span class="math display">\begin{aligned}
+      \text { minimize } &amp; L_{\max } \\
+      \text { s.t. } &amp; :\\
+      &amp;\sum_{i=1}^{m}\sum_{k=1}^{n} \frac{t_{i j}^{(k)}}{p_{ij}}=1, \quad j=1,2, \ldots, n \\
+      &amp;\sum_{j=1}^{n} t_{i j}^{(1)} \leq d_{1}+L_{\max }, \quad i=1,2, \ldots, m \\
+      &amp;\sum_{j=k}^{n} t_{i j}^{(k)} \leq d_{k}-d_{k-1}, \quad i=1,2, \ldots, m, \quad k=2,3, \ldots, n \\
+      &amp;\quad t_{i j}^{(k)} \geq 0 \end{aligned}</span></p>
   <h2 class="unnumbered" id="reference">Reference</h2>
   <div id="refs" class="references" role="doc-bibliography">
     <div id="ref-pinedo2012scheduling">
@@ -180,6 +320,15 @@ layout: post
       <p>[2] V. Timkovsky, “Reducibility among scheduling classes, chapter 8 in handbook of scheduling: Algorithms,
         models, and performance analysis, edited by j. YT. Leung.” Chapman &amp; Hall/CRC Computer; Information Science
         Series, CRC Press Company, 2004.</p>
+    </div>
+    <div id="ref-Lawler1978">
+      <p>[3] E. L. Lawler and J. Labetoulle, “On Preemptive Scheduling of Unrelated Parallel Processors by Linear
+        Programming,” <em>J. ACM</em>, 1978, doi: <a
+          href="https://doi.org/10.1145/322092.322101">10.1145/322092.322101</a>.</p>
+    </div>
+    <div id="ref-Sourd2001">
+      <p>[4] F. Sourd and W. Nuijten, “Scheduling with tails and deadlines,” <em>J. Sched.</em>, 2001, doi: <a
+          href="https://doi.org/10.1002/jos.71">10.1002/jos.71</a>.</p>
     </div>
   </div>
 </body>
