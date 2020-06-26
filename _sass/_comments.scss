@@ -1,0 +1,36 @@
+#gh-comments-list li > a.user img {
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 3px #aaa;
+    width: 60px;
+}
+
+#gh-comments-list {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 45rem;
+    list-style: none;
+    list-style-type: none;
+}
+
+#gh-comments-list li > a.user {
+    width: 2.5em;
+    height: 2.5em;
+    overflow: hidden;
+    padding: 3px;
+}
+
+#gh-comments-list li {
+    margin: 0;
+    padding: 1.5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #aaa;
+}
+
+#gh-comments-list li > code.comment-url {
+    width: 100%;
+    text-align: right;
+    font-size: 0.6em;
+    opacity: 0.5;
+}

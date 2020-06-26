@@ -1,6 +1,6 @@
 /* Append ' (PDF)' to links to slides */
 a[href$=".pdf"]::after {
-  content: ' (PDF)';
+  content: " (PDF)";
 }
 
 /* Style the blockquotes with a fancy quote character */
@@ -20,3 +20,5 @@ blockquote p:first-child::before {
 blockquote *:not(:last-child) {
   font-style: italic;
 }
+
+

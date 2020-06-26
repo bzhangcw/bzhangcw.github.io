@@ -1,5 +1,5 @@
 <script>
-    const GH_API_URL = 'https://github.com/brentian/brentian.github.io/issues/2?client_id=66e2fc5dc540cd4b305e&client_secret=6a0fe2b0b68a795146735d19ce4b78b0e30ed8cf';
+    const GH_API_URL = 'https://api.github.com/repos/brentian/brentian.github.io/issues/{{ page.comments_id }}/comments';
 
     let request = new XMLHttpRequest();
     request.open('GET', GH_API_URL, true);
@@ -30,10 +30,11 @@
 
         user.appendChild(userAvatar);
 
-        let commentLink = document.createElement('a');
+
+        let commentLink = document.createElement('code');
         commentLink.setAttribute('href', response.html_url);
         commentLink.classList.add('comment-url');
-        commentLink.innerHTML = '#' + response.id + ' - ' + response.created_at;
+        commentLink.innerHTML = '@' + response.user.login + '#' + response.id + ' - ' + response.created_at;
 
         let commentContents = document.createElement('div');
         commentContents.classList.add('comment-content');
@@ -53,14 +54,14 @@
     request.send();
 </script>
 
-<hr>
 
 <div class="github-comments">
     <h2>Comments</h2>
     <ul id="gh-comments-list"></ul>
-    <p id="no-comments-found">No comments found for this article. Comments posted before 2019-09-15 are no longer
-        available due to a system migration since I no longer use Disqus for comments.</p>
-    <p id="leave-a-comment">Join the discussion for this article on <a
-            href="https://github.com/brentian/brentian.github.io/issues/2">this ticket</a>. Comments appear on this
+    <p id="leave-a-comment">
+        Join the discussion for this article on
+        <a href="https://github.com/brentian/brentian.github.io/issues/2">this
+            ticket
+        </a>. Comments appear on this
         page instantly.</p>
 </div>
