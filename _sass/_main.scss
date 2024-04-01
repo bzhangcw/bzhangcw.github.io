@@ -63,7 +63,7 @@ pre {
 
 code {
   padding: 0.1rem;
-  font-family: "Roboto Mono", monospace;
+  font-family: "Noto Sans Mono", monospace;
   font-size: 0.8em;
 }
 
@@ -186,7 +186,7 @@ header ul {
 main {
   display: flex;
   flex-wrap: wrap;
-  max-width: 60rem;
+  max-width: 80rem;
   margin: 2rem auto;
   padding: 1rem;
 }
@@ -215,7 +215,7 @@ main {
 section {
   flex-basis: 0;
   flex-grow: 999;
-  min-width: 70%;
+  min-width: 80%;
   display: flex;
   flex-direction: column;
 }
@@ -278,6 +278,20 @@ figcaption {
   width: calc(45% - (#{$spacing-unit} / 2));
 }
 
+
+.footer-col-photo {
+  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
+  width: calc(35% - (#{$spacing-unit} / 2));
+  padding-left: 0em !important;
+  padding-top: 1em !important;
+}
+.footer-col-text {
+  width: -webkit-calc(55% - (#{$spacing-unit} / 2));
+  width: calc(55% - (#{$spacing-unit} / 2));
+  padding-top: 0em !important;
+}
+
+
 @include media-query($on-laptop) {
   .footer-col-1,
   .footer-col-2 {
@@ -302,34 +316,42 @@ figcaption {
 .katex {
   font-size: 1em !important;
 }
+.cns-large {
+  font-size: 1.3em !important;
+  font-weight: 600;
+}
+
+.comment-caption{
+  text-align: center;
+}
 
 // tables, from pandoc
 table {
   margin-bottom: 2em;
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  // border-bottom: 1px solid #ddd;
+  // border-right: 1px solid #ddd;
   border-spacing: 0;
   border-collapse: collapse;
 }
 
 table th {
   padding: 0.2em 1em;
-  background-color: #eee;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  // background-color: #eee;
+  // border-top: 1px solid #ddd;
+  // border-left: 1px solid #ddd;
 }
 
 table td {
   padding: 0.2em 1em;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  // border-top: 1px solid #ddd;
+  // border-left: 1px solid #ddd;
   vertical-align: top;
 }
 
 // listings
 ul,
 ol {
-  margin: 1em 0;
+  margin: 0.5em 0;
   padding: 0 0 0 2em;
 }
 
