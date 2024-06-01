@@ -27,7 +27,7 @@ We build optimization solvers and provide operations research solutions.
 </li>
 <br>
 <li>
-Before that, I was at the University of Texas at Austin from 2015 to 2017, working with <a href="https://www.me.utexas.edu/people/faculty-directory/bard">Jonathan F. Bard</a>. I did my undergraduate study at SJTU.
+Before that, I was at the University of Texas at Austin from 2015 to 2017, working with <a href="https://www.me.utexas.edu/people/faculty-directory/bard">Jonathan F. Bard</a>. I did my undergraduate study at <a href="https://www.sjtu.edu.cn/">SJTU</a>.
 </li>
 <br>
 </ul>
@@ -36,4 +36,9 @@ Before that, I was at the University of Texas at Austin from 2015 to 2017, worki
 </div>
 
 ## News
+
+- July 21-26, 2024, invited talk "HSODF: A Homogeneous Framework for Second-Order Methods" at [ISMP 2024, Montréal](https://ismp2024.gerad.ca/).
+
 - Starting Mar. 2024, I'm visiting Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with [Pengyi Shi](https://business.purdue.edu/directory/bio.php?username=shi178) and [Amy Ward](https://www.chicagobooth.edu/faculty/directory/w/amy-ward)
+
+- Spotlight talk on "DRSOM" at [NeurIPS HOO 2022](https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532)
