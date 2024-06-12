@@ -9,7 +9,7 @@ permalink: /
 <div class="wrapper">
 
 <div class="footer-col footer-col-photo">
-    <img src="../assets/img/photo24.jpg" alt="my photo">
+    <img src="../assets/img/photo24.jpg" alt="my photo" class="personal">
     <div class="footer-col-wrapper social-media-list comment-caption">
     photo taken @ Chicago
     <!-- photo taken @ Songyang (<a href="https://www.google.com.hk/maps/place/Songyang+County,+Lishui,+Zhejiang,+China/@28.4202883,118.8186665,10z/data=!3m1!4b1!4m6!3m5!1s0x344889647cb16d17:0xa37eea0f61551760!8m2!3d28.4494699!4d119.48202!16s%2Fm%2F080cn68?authuser=1&entry=ttu">松阳</a>) -->

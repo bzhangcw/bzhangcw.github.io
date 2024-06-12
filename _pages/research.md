@@ -11,8 +11,7 @@ My research interests include:
 - Optimization solvers and packages. 
   - I involved in a few linear conic optimization solvers, including [ABIP](https://github.com/INFORMSJoC/2023.0017), [cuPDLP-C](https://github.com/COPT-Public/cuPDLP-C)
   - My PhD thesis is accompanied by a Julia package implementing second-order methods, which is now publicly available at the [COPT-Public organization](https://github.com/COPT-Public/DRSOM.jl). My personal fork, which is more frequently updated, can be found at [DRSOM.jl](https://github.com/bzhangcw/DRSOM.jl).
-- Public-sector operations research
-  I also work on a new project related to fairness and criminology.
+- Public-sector operations research.
 
 ## Selected Publications
 
@@ -21,7 +20,7 @@ My research interests include:
 |                                                                                                                                                    |                                                      |
 | :------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------: |
 | **A Universal Trust-Region Method for Convex and Nonconvex Optimization.**                                                                         |                                       Revision, 2023 |
-| with Chang He, Yuntian Jiang, Dongdong Ge, [Bo Jiang](https://sites.google.com/site/isyebojiang/), and [Yinyu Ye](https://web.stanford.edu/~yyye/) |           [[arXiv]](http://arxiv.org/abs/2311.11489) |
+| with Chang He, Yuntian Jiang, [Dongdong Ge](https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html), [Bo Jiang](https://sites.google.com/site/isyebojiang/), and [Yinyu Ye](https://web.stanford.edu/~yyye/) |           [[arXiv]](http://arxiv.org/abs/2311.11489) |
 |                                                                                                                                                    |                                                      |
 | **A Homogeneous Second-Order Descent Method for Nonconvex Optimization**                                                                           |                                        Revision,2023 |
 | with ___                                                                                                                                           | [[arXiv]](https://doi.org/10.48550/arXiv.2306.17516) |
