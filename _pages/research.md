@@ -36,7 +36,7 @@ My research interests include:
 
 |                                                                                                                                     |               |
 | :---------------------------------------------------------------------------------------------------------------------------------- | ------------: |
-| **A Customized Augmented Lagrangian Method for Block-Structured Integer Programming**                                               | Revision,2023 |
+| **A Customized Augmented Lagrangian Method for Block-Structured Integer Programming**                                               | [IEEE TPAMI., 2024](#) |
 | with Rui Wang, Shanwen Pu, Jianjun Gao, [Zaiwen Wen](http://faculty.bicmr.pku.edu.cn/~wenzw)                                        |               |
 |                                                                                                                                     |               |
 | **An Approximate Dynamic Programming Approach for Solving Aircraft Fleet Engine Maintenance Problem: Methodology and A Case Study** | Revision,2023 |
