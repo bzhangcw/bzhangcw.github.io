@@ -38,7 +38,7 @@ Before that, I was at the University of Texas at Austin from 2015 to 2017, worki
 
 ## News
 - Oct. 20-23, 2024, will present "A Game-Theoretic Framework of Fairness Dynamics: Equilibrium, Control and Beyond" at 2024 INFORMS Annual Meeting, Washington, WA
-- July 21-26, 2024, invited talk "HSODF: A Homogeneous Framework for Second-Order Methods" at [ISMP 2024, Montréal](https://ismp2024.gerad.ca/).
+- July 21-26, 2024, will present "HSODF: A Homogeneous Framework for Second-Order Methods" at [ISMP 2024, Montréal](https://ismp2024.gerad.ca/).
 
 - Starting Mar. 2024, I'm visiting Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with [Pengyi Shi](https://business.purdue.edu/directory/bio.php?username=shi178) and [Amy Ward](https://www.chicagobooth.edu/faculty/directory/w/amy-ward)
 
