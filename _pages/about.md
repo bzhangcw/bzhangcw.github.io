@@ -42,4 +42,4 @@ Before that, I was at the University of Texas at Austin from 2015 to 2017, worki
 
 - Starting Mar. 2024, I'm visiting Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with [Pengyi Shi](https://business.purdue.edu/directory/bio.php?username=shi178) and [Amy Ward](https://www.chicagobooth.edu/faculty/directory/w/amy-ward)
 
-- Spotlight talk on "DRSOM" at [NeurIPS HOO 2022](https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532)
+- Spotlight talk at NeurIPS HOO 2022, New Orleans, LA on [DRSOM](https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532)
