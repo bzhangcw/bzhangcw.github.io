@@ -8,6 +8,8 @@ permalink: /research
 
 > Second-order optimization methods.
 
+A Julia Package for DRSOM, HSODM, UTR: [DRSOM.jl](https://github.com/bzhangcw/DRSOM.jl)
+
 |                                                                                                                                                                                                               |                                                                                               |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------: |
 | **A Universal Trust-Region Method for Convex and Nonconvex Optimization.**                                                                                                                                    |                                                                                Revision, 2023 |
@@ -24,14 +26,14 @@ permalink: /research
 
 
 ## Mixed-Integer Optimization & Applications
-Real-world applications in the industry. This track is heavily motivated from the experiences at Cardinal. 
+Real-world applications in the industry.
 
 |                                                                                                                                     |                                                                 |
 | :---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------: |
 | **A Customized Augmented Lagrangian Method for Block-Structured Integer Programming**                                               | [IEEE TPAMI., 2024](https://doi.org/10.1109/TPAMI.2024.3416514) |
 | with Rui Wang, Shanwen Pu, Jianjun Gao, [Zaiwen Wen](http://faculty.bicmr.pku.edu.cn/~wenzw)                                        |                                                                 |
 |                                                                                                                                     |                                                                 |
-| **An Approximate Dynamic Programming Approach for Solving Aircraft Fleet Engine Maintenance Problem: Methodology and A Case Study** |                                                   Revision,2023 |
+| **An Approximate Dynamic Programming Approach for Solving Aircraft Fleet Engine Maintenance Problem: Methodology and A Case Study** |                                                [EJOR., 2024](#) |
 | with Miao Zhang, Jingyuan Yang, Simai He, Huikang Liu, and Zizhuo Wang                                                              |                                                                 |
 
 ## Optimization Solvers
