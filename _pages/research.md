@@ -4,35 +4,27 @@ title: Research
 permalink: /research
 ---
 
-My research interests include:
-- Second-order optimization methods (SOMs) and general nonlinear programming.
-- Mixed-integer optimization with real-world applications in the industry. This track is heavily motivated from the experiences at Cardinal. 
-  - See work on [High-Speed Railway](https://doi.org/10.1109/TPAMI.2024.3416514), [Maintenance Scheduling for Airlines](#)
-- Optimization solvers and packages. 
-  - I involved in a few linear conic optimization solvers, including [ABIP](https://github.com/INFORMSJoC/2023.0017), [cuPDLP-C](https://github.com/COPT-Public/cuPDLP-C)
-  - My PhD thesis is accompanied by a Julia package implementing second-order methods, which is now publicly available at the [COPT-Public organization](https://github.com/COPT-Public/DRSOM.jl). My personal fork, which is more frequently updated, can be found at [DRSOM.jl](https://github.com/bzhangcw/DRSOM.jl).
-- Public-sector operations research.
+## Nonlinear programming
 
-## Selected Publications
+> Second-order optimization methods.
 
-> SOMs
-
-|                                                                                                                                                                                                               |                                                      |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------: |
-| **A Universal Trust-Region Method for Convex and Nonconvex Optimization.**                                                                                                                                    |                                       Revision, 2023 |
-| with Chang He, Yuntian Jiang, [Dongdong Ge](https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html), [Bo Jiang](https://sites.google.com/site/isyebojiang/), and [Yinyu Ye](https://web.stanford.edu/~yyye/) |           [[arXiv]](http://arxiv.org/abs/2311.11489) |
-|                                                                                                                                                                                                               |                                                      |
-| **A Homogeneous Second-Order Descent Method for Nonconvex Optimization**                                                                                                                                      |                                        Revision,2023 |
-| with ___                                                                                                                                                                                                      | [[arXiv]](https://doi.org/10.48550/arXiv.2306.17516) |
-|                                                                                                                                                                                                               |                                                      |
-| **Homogeneous Second-Order Descent Framework: A Fast Alternative to Newton-Type Methods**                                                                                                                     |                                       Revision, 2023 |
-| with ___                                                                                                                                                                                                      |           [[arXiv]](http://arxiv.org/abs/2211.08212) |
-|                                                                                                                                                                                                               |                                                      |
-| **DRSOM: A Dimension Reduced Second-Order Method.**                                                                                                                                                           |                                        Revision,2022 |
-| with ___                                                                                                                                                                                                      |           [[arXiv]](http://arxiv.org/abs/2208.00208) |
+|                                                                                                                                                                                                               |                                                                                               |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------: |
+| **A Universal Trust-Region Method for Convex and Nonconvex Optimization.**                                                                                                                                    |                                                                                Revision, 2023 |
+| with Chang He, Yuntian Jiang, [Dongdong Ge](https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html), [Bo Jiang](https://sites.google.com/site/isyebojiang/), and [Yinyu Ye](https://web.stanford.edu/~yyye/) |                                                    [[arXiv]](http://arxiv.org/abs/2311.11489) |
+|                                                                                                                                                                                                               |                                                                                               |
+| **A Homogeneous Second-Order Descent Method for Nonconvex Optimization**                                                                                                                                      |                                                                                 Revision,2023 |
+| with ___                                                                                                                                                                                                      |                                          [[arXiv]](https://doi.org/10.48550/arXiv.2306.17516) |
+|                                                                                                                                                                                                               |                                                                                               |
+| **Homogeneous Second-Order Descent Framework: A Fast Alternative to Newton-Type Methods**                                                                                                                     |                                                                                Revision, 2023 |
+| with ___                                                                                                                                                                                                      | [[arXiv]](http://arxiv.org/abs/2211.08212)[[supplemental report]](/assets/pdfs/bisection.pdf) |
+|                                                                                                                                                                                                               |                                                                                               |
+| **DRSOM: A Dimension Reduced Second-Order Method.**                                                                                                                                                           |                                                                                 Revision,2022 |
+| with ___                                                                                                                                                                                                      |                                                    [[arXiv]](http://arxiv.org/abs/2208.00208) |
 
 
-> Mixed-Integer Optimization & Applications
+## Mixed-Integer Optimization & Applications
+Real-world applications in the industry. This track is heavily motivated from the experiences at Cardinal. 
 
 |                                                                                                                                     |                                                                 |
 | :---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------: |
@@ -42,7 +34,7 @@ My research interests include:
 | **An Approximate Dynamic Programming Approach for Solving Aircraft Fleet Engine Maintenance Problem: Methodology and A Case Study** |                                                   Revision,2023 |
 | with Miao Zhang, Jingyuan Yang, Simai He, Huikang Liu, and Zizhuo Wang                                                              |                                                                 |
 
-> Optimization Solvers
+## Optimization Solvers
 
 |                                                                                            |                                                              |
 | :----------------------------------------------------------------------------------------- | -----------------------------------------------------------: |
