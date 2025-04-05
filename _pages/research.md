@@ -4,25 +4,22 @@ title: Research
 permalink: /research
 ---
 
-## Nonlinear programming
-
-> Second-order optimization methods.
-
 A Julia Package for DRSOM, HSODM, UTR: [DRSOM.jl](https://github.com/bzhangcw/DRSOM.jl)
+
+## Nonlinear programming
 
 |                                                                                                                                                                                         |                                                                                                                                                                    |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | **A Universal Trust-Region Method for Convex and Nonconvex Optimization.**                                                                                                              |                                                                                                                                                     Revision, 2023 |
 | with C He, Y Jiang, [D Ge](https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html), [B Jiang](https://sites.google.com/site/isyebojiang/), and [Y Ye](https://web.stanford.edu/~yyye/) |                                                                                                                         [[arXiv]](http://arxiv.org/abs/2311.11489) |
 |                                                                                                                                                                                         |                                                                                                                                                                    |
-| **A Homogeneous Second-Order Descent Method for Nonconvex Optimization**                                                                                                                |                                                                                                                                                      Revision,2023 |
+| **A Homogeneous Second-Order Descent Method for Nonconvex Optimization**                                                                                                                |                                                                                                                                               Math. OR (to appear) |
 | with ___                                                                                                                                                                                |                                                                                                               [[arXiv]](https://doi.org/10.48550/arXiv.2306.17516) |
 |                                                                                                                                                                                         |                                                                                                                                                                    |
 | **Homogeneous Second-Order Descent Framework: A Fast Alternative to Newton-Type Methods**                                                                                               |                                                                                                                                                     Revision, 2023 |
 | with ___                                                                                                                                                                                | [[arXiv]](http://arxiv.org/abs/2211.08212)[[supplemental report]](/assets/pdfs/bisection.pdf)[[slides]](https://web.stanford.edu/class/msande314/lecture16OPTMLDS) |
 |                                                                                                                                                                                         |                                                                                                                                                                    |
-| **DRSOM: A Dimension Reduced Second-Order Method.**                                                                                                                                     |                                                                                                                                                      Revision,2022 |
-| with ___                                                                                                                                                                                |                                                                                                                         [[arXiv]](http://arxiv.org/abs/2208.00208) |
+
 
 
 ## Mixed-Integer Optimization & Applications
@@ -52,3 +49,11 @@ Real-world applications in the industry.
 | :----------------------------------------------------------------------------------------- | -------------------------------------------------------------------: |
 | **Trust Region Methods for Nonconvex Stochastic Optimization beyond Lipschitz Smoothness** | [AAAI, 2024](https://ojs.aaai.org/index.php/AAAI/article/view/29537) |
 | with C Xie, C Li, Q Deng, D Ge, Y Ye                                                       |
+
+
+## Working papers
+
+|                                                                                                                                                                                         |                                            |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------: |
+| **DRSOM: A Dimension Reduced Second-Order Method.**                                                                                                                                     |                                       2022 |
+| with C He, Y Jiang, [D Ge](https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html), [B Jiang](https://sites.google.com/site/isyebojiang/), and [Y Ye](https://web.stanford.edu/~yyye/) | [[arXiv]](http://arxiv.org/abs/2208.00208) |
