@@ -23,7 +23,7 @@ I'm currently a PhD student at Shanghai University of Finance and Economics, adv
 </li>
 <br>
 <li>
-Starting from 2018, I work as an Operations Research Engineer at <a href="https://www.shanshu.ai/" class="cns-large">[杉数科技]</a>, where I'm also advised by <a href="https://mypage.cuhk.edu.cn/academics/wangzizhuo/">Zizhuo Wang</a>. 
+Starting from 2018, I work as an Operations Research Engineer at <a href="https://www.shanshu.ai/">[Cardinal Operations]</a>, where I'm also advised by <a href="https://mypage.cuhk.edu.cn/academics/wangzizhuo/">Zizhuo Wang</a>. 
 We build optimization solvers and provide operations research solutions. 
 </li>
 <br>
