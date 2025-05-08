@@ -19,8 +19,9 @@ permalink: /research
 | with ___                                                                                                                                                                                | [[arXiv]](https://doi.org/10.48550/arXiv.2306.17516)[[suppl. report]](/assets/pdfs/bisection.pdf)[[slides]](https://web.stanford.edu/class/msande314/lecture16OPTMLDS) |
 |                                                                                                                                                                                         |                                                                                                                                                                        |
 | **Trust region methods for nonconvex stochastic optimization beyond Lipschitz smoothness**                                                                                              |                                                                                                   [AAAI, 2024](https://ojs.aaai.org/index.php/AAAI/article/view/29537) |
-| with C Xie, C Li, Q Deng, D Ge, Y Ye                                                                                                                                                    |
-
+| with C Xie, C Li, Q Deng, D Ge, Y Ye                                                                                                                                                    |                                                                                                                                                                        |
+| **A homogenization approach for gradient-dominated stochastic optimization**                                                                                                            |                                                                                                            [UAI, 2024](https://proceedings.mlr.press/v244/tan24a.html) |
+| with C Xie, C Li, Q Deng, D Ge, Y Ye                                                                                                                                                    |                                                                                                                                                                        |
 
 
 
