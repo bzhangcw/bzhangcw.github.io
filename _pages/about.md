@@ -31,14 +31,16 @@ We build optimization solvers and provide operations research solutions.
 Before that, I was at the University of Texas at Austin from 2015 to 2017, working with <a href="https://www.me.utexas.edu/people/faculty-directory/bard">Jonathan F. Bard</a>. I did my undergraduate study at <a href="https://www.sjtu.edu.cn/">Shanghai Jiao Tong University</a>.
 </li>
 <br>
+<li>
+Please find my CV <a href="/assets/pdfs/cv2505-complete.pdf">here</a>.
+</li>
 </ul>
 </div>
 
 </div>
 
 ## News
-- Apr. 2025, I will join the University of Chicago Booth School of Business as a Principal Researcher, working with Professor Amy Ward.
-- Oct. 20-23, 2024, "A Game-Theoretic Framework of Fairness Dynamics: Equilibrium, Control and Beyond" at INFORMS Annual Meeting, Washington, WA.
-- July 21-26, 2024, "HSODF: A Homogeneous Framework for Second-Order Methods" at [ISMP](https://ismp2024.gerad.ca/), Montréal, Canada.
-- Mar. 2024 - Mar. 2025, I visited Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with [Pengyi Shi](https://business.purdue.edu/directory/bio.php?username=shi178) and [Amy Ward](https://www.chicagobooth.edu/faculty/directory/w/amy-ward).
-- Dec 2. 2022, Spotlight talk on DRSOM at [NeurIPS HOO](https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532),  New Orleans, LA.
+<div class="wrapper news">
+<ul class="news-list"><li>Apr. 2025, I will join the University of Chicago Booth School of Business as a Principal Researcher, working with Professor Amy Ward.</li><li>Oct. 20-23, 2024, “A Game-Theoretic Framework of Fairness Dynamics: Equilibrium, Control and Beyond” at INFORMS Annual Meeting, Washington, WA.</li><li>July 21-26, 2024, “HSODF: A Homogeneous Framework for Second-Order Methods” at <a href="https://ismp2024.gerad.ca/">ISMP</a>, Montréal, Canada.</li><li>Mar. 2024 - Mar. 2025, I visited Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with <a href="https://business.purdue.edu/directory/bio.php?username=shi178">Pengyi Shi</a> and <a href="https://www.chicagobooth.edu/faculty/directory/w/amy-ward">Amy Ward</a>.</li><li>Dec 2. 2022, Spotlight talk on DRSOM at <a href="https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532">NeurIPS HOO</a>, New Orleans, LA.</li></ul>
+
+</div>

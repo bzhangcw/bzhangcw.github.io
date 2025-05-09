@@ -368,7 +368,23 @@ li p:last-child {
   margin-bottom: 0;
 }
 
-personal {
+.news {
+  max-width: 80rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0rem;
+  padding: 1rem;
+}
+
+.news-list {
+  padding-left: 0em;
+  max-width: 65rem;
+  /* adjust as needed */
+  text-align: left;
+  margin: 0;
+}
+
+.personal {
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
