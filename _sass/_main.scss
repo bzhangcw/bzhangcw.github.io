@@ -1,6 +1,7 @@
 @import "var";
 @import "syntax_github";
 @import "comments";
+
 *,
 :after,
 :before {
@@ -187,7 +188,7 @@ header ul {
 main {
   display: flex;
   flex-wrap: wrap;
-  max-width: 80rem;
+  max-width: 90rem;
   margin: 2rem auto;
   padding: 1rem;
 }
@@ -197,13 +198,16 @@ main {
     display: inline;
     margin-right: 1rem;
   }
+
   .logo {
     padding-bottom: 1rem;
   }
+
   header ul {
     border-bottom: 1px solid #edf2f7;
     padding-bottom: 2rem;
   }
+
   nav ul {
     border-right: 0px;
   }
@@ -286,6 +290,7 @@ figcaption {
   padding-left: 0em !important;
   padding-top: 1em !important;
 }
+
 .footer-col-text {
   width: -webkit-calc(55% - (#{$spacing-unit} / 2));
   width: calc(55% - (#{$spacing-unit} / 2));
@@ -294,6 +299,7 @@ figcaption {
 
 
 @include media-query($on-laptop) {
+
   .footer-col-1,
   .footer-col-2 {
     width: -webkit-calc(50% - (#{$spacing-unit} / 2));
@@ -313,16 +319,18 @@ figcaption {
     width: calc(100% - (#{$spacing-unit} / 2));
   }
 }
+
 // KaTeX macros
 .katex {
   font-size: 1em !important;
 }
+
 .cns-large {
   font-size: 1.3em !important;
   font-weight: 600;
 }
 
-.comment-caption{
+.comment-caption {
   text-align: center;
 }
 
@@ -362,15 +370,15 @@ li p:last-child {
 
 personal {
   -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 img {
