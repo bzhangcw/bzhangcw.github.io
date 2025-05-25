@@ -18,7 +18,7 @@ permalink: /
 <div class="footer-col footer-col-text">
 <ul class="social-media-list">
 <li>
-I'm currently Principal Researcher at the University of Chicago Booth School of Business, working with Professor Amy Ward.
+I'm currently Principal Researcher at the University of Chicago Booth School of Business, working with Professor <a href="https://www.chicagobooth.edu/faculty/directory/w/amy-ward">Amy Ward</a>.
 I received by PhD at Shanghai University of Finance and Economics in 2025, advised by <a href="https://web.stanford.edu/~yyye/">Yinyu Ye</a> and <a href="https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html"> Dongdong Ge</a>.
 </li>
 <br>
