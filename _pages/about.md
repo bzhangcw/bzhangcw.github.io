@@ -19,7 +19,7 @@ permalink: /
 <ul class="social-media-list">
 <li>
 I'm currently Principal Researcher at the University of Chicago Booth School of Business, working with Professor <a href="https://www.chicagobooth.edu/faculty/directory/w/amy-ward">Amy Ward</a>.
-I received by PhD at Shanghai University of Finance and Economics in 2025, advised by <a href="https://web.stanford.edu/~yyye/">Yinyu Ye</a> and <a href="https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html"> Dongdong Ge</a>. I was a visiting PhD student of Pengyi Shi (Purdue University) and Amy Ward (Chicago Booth School of Business) during 2024-2025.
+I received by PhD at Shanghai University of Finance and Economics in 2025, advised by <a href="https://web.stanford.edu/~yyye/">Yinyu Ye</a> and <a href="https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html"> Dongdong Ge</a>. I was a visiting PhD student of <a href="https://web.ics.purdue.edu/~shi178/"> Pengyi Shi </a> (Purdue University) during 2024-2025.
 </li>
 <br>
 <li>
