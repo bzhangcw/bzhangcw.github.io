@@ -42,12 +42,13 @@ Please find my CV <a href="/assets/pdfs/cv2505-complete.pdf">here</a>.
 ## News
 <div class="wrapper news">
 <ul class="news-list">
-<li>July. 2025, “Price Updates by Interior-Point Methods” at <a href="https://iccopt2025usc.sched.com/event/1dqrb/parallel-sessions-7p-advances-in-nonlinear-optimization-methods-and-applications">ICCOPT</a>, Los Angeles, CA.</li>
-<li>Apr. 2025, I will join the University of Chicago Booth School of Business as a Principal Researcher, working with Professor Amy Ward.</li>
-<li>Oct. 2024, “A Game-Theoretic Framework of Fairness Dynamics: Equilibrium, Control and Beyond” at INFORMS Annual Meeting, Washington, WA.</li>
-<li>July. 2024, “HSODF: A Homogeneous Framework for Second-Order Methods” at <a href="https://ismp2024.gerad.ca/">ISMP</a>, Montréal, Canada.</li>
-<li>Mar. 2024, I will visit Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with Pengyi Shi and Amy Ward.</li>
-<li>Dec 2. 2022, Spotlight talk on DRSOM at <a href="https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532">NeurIPS HOO</a>, New Orleans, LA.</li>
+<li>July 2025, “Price Updates by Interior-Point Methods” at <a href="https://iccopt2025usc.sched.com/event/1dqrb/parallel-sessions-7p-advances-in-nonlinear-optimization-methods-and-applications">ICCOPT</a>, Los Angeles, CA.</li>
+<li>Apr 2025, I will join the University of Chicago Booth School of Business as a Principal Researcher, working with Professor Amy Ward.</li>
+<li>Oct 2024, “A Game-Theoretic Framework of Fairness Dynamics: Equilibrium, Control and Beyond” at INFORMS Annual Meeting, Washington, WA.</li>
+<li>July 2024, “HSODF: A Homogeneous Framework for Second-Order Methods” at <a href="https://ismp2024.gerad.ca/">ISMP</a>, Montréal, Canada.</li>
+<li>Mar 2024, I will visit Mitchell E. Daniels, Jr. School of Business, Purdue University and Chicago Booth School of Business, working with Pengyi Shi and Amy Ward.</li>
+<li>Dec 31, 2023, A C-implementation of cuPDLP is released, see <a href="https://github.com/COPT-Public/cuPDLP-C">here</a>.</li>
+<li>Dec 2, 2022, Spotlight talk on DRSOM at <a href="https://neurips.cc/virtual/2022/workshop/50003#wse-detail-64532">NeurIPS HOO</a>, New Orleans, LA.</li>
 </ul>
 
 </div>
