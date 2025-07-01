@@ -5,7 +5,7 @@ permalink: /research
 ---
 
 
-## Nonlinear programming
+## Nonlinear Programming
 
 |                                                                                                                                                                                         |                                                                                                                                                                        |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -55,3 +55,4 @@ Real-world applications in the industry.
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------------------------------------------------------------------------------------: |
 | **DRSOM: A dimension reduced second-order method.**                                                                                                                                     |                                                                                       2022 |
 | with C He, Y Jiang, [D Ge](https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html), [B Jiang](https://sites.google.com/site/isyebojiang/), and [Y Ye](https://web.stanford.edu/~yyye/) | [[arXiv]](http://arxiv.org/abs/2208.00208)[[GitHub]](https://github.com/bzhangcw/DRSOM.jl) |
+| **Homogeneous Methods: Model, Algorithm, and Applications. (in Chinese)**, [PhD thesis](assets/pdfs/zhangcw-thesis-250514.pdf)                                                          |                                                                                       2025 |
