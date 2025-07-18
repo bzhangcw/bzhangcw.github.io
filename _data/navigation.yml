@@ -7,5 +7,5 @@ links:
     url: /search
   # - title: RSS
   #   url: /atom.xml
-  # - title: Posts
-  # url: /posts
+  - title: Posts
+    url: /posts
