@@ -23,7 +23,7 @@ I'm currently Principal Researcher at the University of Chicago Booth School of 
 <br>
 <li>
 I received by PhD at Shanghai University of Finance and Economics in 2025, advised by <a href="https://web.stanford.edu/~yyye/">Yinyu Ye</a> and <a href="https://www.acem.sjtu.edu.cn/en/faculty/gedongdong.html"> Dongdong Ge</a>. I was a visiting PhD student of <a href="https://web.ics.purdue.edu/~shi178/"> Pengyi Shi </a> (Purdue University) during 2024-2025.
-Starting from 2018, I work as an Operations Research Engineer at <a href="https://www.shanshu.ai/">[Cardinal Operations]</a>, where I'm also advised by <a href="https://mypage.cuhk.edu.cn/academics/wangzizhuo/">Zizhuo Wang</a>. 
+Starting from 2018, I work as an Operations Research Engineer at <a href="https://www.shanshu.ai/">[Cardinal Operations]</a>. I was fortunate to work with <a href="https://mypage.cuhk.edu.cn/academics/wangzizhuo/">Zizhuo Wang</a> and <a href="https://sites.google.com/site/isyebojiang/"> Bo Jiang</a>.
 We build optimization solvers and provide operations research solutions. 
 </li>
 <br>

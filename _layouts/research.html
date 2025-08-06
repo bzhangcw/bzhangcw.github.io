@@ -1,0 +1,132 @@
+---
+layout: default
+---
+
+<section class="post">
+    <h2>{{ page.title }}</h2>
+    <h3>{{ page.author }}</h3>
+
+    <!-- Filter Controls -->
+    <div class="filter-controls">
+        <div class="filter-group">
+            <label for="yearSelect">Filter by year:</label>
+            <select id="yearSelect" onchange="filterPublications()">
+                <option value="all">All Years</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="tagSelect">Filter by tag:</label>
+            <select id="tagSelect" onchange="filterPublications()">
+                <option value="all">All Tags</option>
+                <option value="nonlinear-programming">Nonlinear Programming</option>
+                <option value="mixed-integer">Mixed-Integer Optimization</option>
+                <option value="optimization-solvers">Optimization Solvers</option>
+                <option value="economics">Computational Economics</option>
+                <option value="working-papers">Working Papers</option>
+            </select>
+        </div>
+    </div>
+
+    {{ content }}
+</section>
+
+<style>
+    .filter-controls {
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        border: 1px solid #e9ecef;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filter-group label {
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .filter-group select {
+        padding: 5px 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background-color: white;
+        font-size: 14px;
+        min-width: 150px;
+    }
+
+    .publication-item {
+        transition: opacity 0.3s ease;
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #e9ecef;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+    .publication-item.hidden {
+        display: none;
+    }
+
+    .publication-item.fade {
+        opacity: 0.5;
+    }
+
+    .publication-item table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .publication-item td {
+        padding: 8px;
+        vertical-align: top;
+    }
+
+    .publication-year {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .publication-tags {
+        margin-top: 8px;
+        font-size: 0.9em;
+        color: #6c757d;
+    }
+
+    .publication-tags span {
+        display: inline-block;
+        background-color: #e9ecef;
+        color: #495057;
+        padding: 2px 8px;
+        margin: 2px;
+        border-radius: 12px;
+        font-size: 0.8em;
+    }
+
+    @media (max-width: 768px) {
+        .filter-controls {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .filter-group {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+    }
+</style>
+
+<script src="{{ site.baseurl }}/assets/js/research-filter.js"></script>
