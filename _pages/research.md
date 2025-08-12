@@ -22,6 +22,7 @@ permalink: /research
     <span>nonlinear-programming</span>
   </div>
 </div>
+
 <div class="publication-item">
   <table>
     <tr>
@@ -40,6 +41,7 @@ permalink: /research
     <span>nonlinear-programming</span>
   </div>
 </div>
+
 <div class="publication-item">
   <table>
     <tr>
@@ -58,6 +60,7 @@ permalink: /research
     <span>nonlinear-programming</span>
   </div>
 </div>
+
 <div class="publication-item">
   <table>
     <tr>
@@ -95,12 +98,17 @@ permalink: /research
 <div class="publication-item">
   <table>
     <tr>
-      <td><strong>A homogeneous second-order descent method for nonconvex optimization</strong><br>
-      with C He, Y Jiang, D Ge, B Jiang, and Y Ye</td>
+      <td>
+      <strong>Homogeneous second-order descent framework: A fast alternative to Newton-type methods</strong>
+      <br>with C He, Y Jiang, D Ge, B Jiang, and Y Ye
+      <br><span class="award">iSoGO Student Paper Award @<a href="http://www.globaloptimization.org/conferences/goc-2025/">GOC 2025</a> (honored to C He).</span>
+      </td>
       <td style="text-align: right;"><span class="publication-year">2025</span><br>
-      <a href="https://pubsonline.informs.org/doi/10.1287/moor.2023.0132">Math. Oper. Res.</a><br>
-      <a href="http://arxiv.org/abs/2211.08212">[arXiv]</a></td>
+      <a href="https://doi.org/10.1007/s10107-025-02230-3">Math. Prog.</a><br>
+      <a href="https://doi.org/10.48550/arXiv.2306.17516">[arXiv]</a><a href="/assets/pdfs/bisection.pdf">[suppl. report]</a><a href="https://web.stanford.edu/class/msande314/lecture16OPTMLDS">[slides]</a></td>
     </tr>
+    
+    
   </table>
   <div class="publication-tags">
     <span>2025</span><span>nonlinear-programming</span>
@@ -110,11 +118,11 @@ permalink: /research
 <div class="publication-item">
   <table>
     <tr>
-      <td><strong>Homogeneous second-order descent framework: A fast alternative to Newton-type methods</strong><br>
+      <td><strong>A homogeneous second-order descent method for nonconvex optimization</strong><br>
       with C He, Y Jiang, D Ge, B Jiang, and Y Ye</td>
       <td style="text-align: right;"><span class="publication-year">2025</span><br>
-      <a href="https://doi.org/10.1007/s10107-025-02230-3">Math. Prog.</a><br>
-      <a href="https://doi.org/10.48550/arXiv.2306.17516">[arXiv]</a><a href="/assets/pdfs/bisection.pdf">[suppl. report]</a><a href="https://web.stanford.edu/class/msande314/lecture16OPTMLDS">[slides]</a></td>
+      <a href="https://pubsonline.informs.org/doi/10.1287/moor.2023.0132">Math. Oper. Res.</a><br>
+      <a href="http://arxiv.org/abs/2211.08212">[arXiv]</a></td>
     </tr>
   </table>
   <div class="publication-tags">
