@@ -25,6 +25,24 @@ permalink: /research
 <div class="publication-item">
   <table>
     <tr>
+      <td><strong>Curvature exploitation, variable metric and preconditioning for stochastic online market</strong><br>
+      with C He</td>
+      <td style="text-align: right;"><span class="publication-year">2025</span>
+      <br>
+      <!-- <a href="http://arxiv.org/abs/2211.08212">[SSRN]</a> -->
+      in preparation
+      </td>
+    </tr>
+  </table>
+  <div class="publication-tags">
+    <span>2025</span>
+    <span>economics</span>
+    <span>nonlinear-programming</span>
+  </div>
+</div>
+<div class="publication-item">
+  <table>
+    <tr>
       <td><strong>On interior-point price updates for Arrow-Debreu exchange markets</strong><br>
       with C He</td>
       <td style="text-align: right;"><span class="publication-year">2025</span>
