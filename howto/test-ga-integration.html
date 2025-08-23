@@ -15,7 +15,6 @@
         .code { background-color: #f8f9fa; padding: 10px; border-radius: 4px; font-family: monospace; }
         .button-group { margin: 10px 0; }
         button { margin: 5px; padding: 8px 16px; cursor: pointer; }
-        .deployment-info { background-color: #e2e3e5; padding: 15px; border-radius: 4px; margin: 10px 0; }
     </style>
 </head>
 <body>
@@ -42,16 +41,6 @@
 
     <div class="test-section">
         <h2>API Endpoint Test</h2>
-        <div class="deployment-info">
-            <strong>⚠️ Important:</strong> The real API endpoints only work when deployed to Netlify, not locally.
-            <br><br>
-            <strong>To test the real API:</strong>
-            <ol>
-                <li>Deploy this site to Netlify</li>
-                <li>Set up environment variables in Netlify dashboard</li>
-                <li>Test on the deployed site URL</li>
-            </ol>
-        </div>
         <div class="button-group">
             <button onclick="testAPI()">Test /api/ga-visits Endpoint</button>
             <button onclick="testAPILocal()">Test Local Function (if available)</button>
@@ -61,48 +50,35 @@
     </div>
 
     <div class="test-section">
-        <h2>Local vs Deployed Testing</h2>
+        <h2>Common Issues & Solutions</h2>
         <div class="status warning">
-            <strong>Current Environment:</strong> <span id="environment-info">...</span>
-            <br><br>
-            <strong>What works locally:</strong>
+            <strong>Why the API test might be failing:</strong>
             <ul>
-                <li>✅ Fallback script (shows simulated data)</li>
-                <li>✅ Counter functionality</li>
-                <li>❌ Real API endpoints (404 errors expected)</li>
-            </ul>
-            <br>
-            <strong>What works on Netlify:</strong>
-            <ul>
-                <li>✅ Real API endpoints</li>
-                <li>✅ Actual Google Analytics data</li>
-                <li>✅ Serverless functions</li>
+                <li><strong>Local Development:</strong> The API endpoint only works when deployed to Netlify</li>
+                <li><strong>Missing Service Account:</strong> Google Analytics credentials not configured</li>
+                <li><strong>Environment Variables:</strong> GOOGLE_APPLICATION_CREDENTIALS not set in Netlify</li>
+                <li><strong>GA4 Permissions:</strong> Service account doesn't have access to the GA4 property</li>
             </ul>
         </div>
     </div>
 
     <div class="test-section">
-        <h2>Next Steps for Real API</h2>
+        <h2>Setup Instructions</h2>
         <ol>
-            <li><strong>Deploy to Netlify:</strong> Push your code to GitHub and connect to Netlify</li>
-            <li><strong>Set Environment Variables:</strong> In Netlify dashboard, add:
-                <div class="code">
-                    GOOGLE_APPLICATION_CREDENTIALS = [contents of service account JSON]
-                </div>
-            </li>
-            <li><strong>Test on Deployed Site:</strong> Visit your Netlify URL and test the API</li>
-            <li><strong>Switch to Real API:</strong> Use the "Switch to Real API" button above</li>
+            <li>Follow the setup guide in <code>GA_INTEGRATION_SETUP.md</code></li>
+            <li>Deploy to Netlify with proper environment variables</li>
+            <li>Test the API endpoint on the deployed site</li>
+            <li>Switch from fallback to real GA integration</li>
         </ol>
     </div>
 
-    <script src="../assets/js/ga-visit-counter-fallback.js"></script>
+    <script src="assets/js/ga-visit-counter-fallback.js"></script>
     <script>
         // Analyze current setup
         function analyzeSetup() {
             const details = [];
             const statusDiv = document.getElementById('setup-status');
             const detailsDiv = document.getElementById('setup-details');
-            const envInfo = document.getElementById('environment-info');
             
             // Check if we're on localhost
             const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -110,12 +86,10 @@
                 details.push('📍 Running locally - API endpoint will not work');
                 statusDiv.className = 'status warning';
                 statusDiv.textContent = 'Local Development Mode';
-                envInfo.textContent = 'Local Development (localhost)';
             } else {
                 details.push('✅ Running on deployed site');
                 statusDiv.className = 'status success';
                 statusDiv.textContent = 'Deployed Environment';
-                envInfo.textContent = 'Deployed Site (' + window.location.hostname + ')';
             }
             
             // Check current script
@@ -144,7 +118,7 @@
             
             // Add real API script
             const realScript = document.createElement('script');
-            realScript.src = '../assets/js/ga-visit-counter.js';
+            realScript.src = 'assets/js/ga-visit-counter.js';
             document.head.appendChild(realScript);
             
             // Update status
@@ -161,7 +135,7 @@
             
             // Add fallback script
             const fallbackScript = document.createElement('script');
-            fallbackScript.src = '../assets/js/ga-visit-counter-fallback.js';
+            fallbackScript.src = 'assets/js/ga-visit-counter-fallback.js';
             document.head.appendChild(fallbackScript);
             
             // Update status
@@ -191,7 +165,7 @@
                 .catch(error => {
                     statusDiv.className = 'status error';
                     statusDiv.textContent = `API test failed: ${error.message}`;
-                    responseDiv.textContent = 'This is expected when running locally.\n\nTo test the real API:\n1. Deploy to Netlify\n2. Set up environment variables\n3. Test on the deployed site';
+                    responseDiv.textContent = 'This is expected if:\n- Running locally (not on Netlify)\n- Service account not configured\n- Environment variables not set\n\nCheck GA_INTEGRATION_SETUP.md for setup instructions.';
                 });
         }
 
@@ -217,7 +191,7 @@
                 .catch(error => {
                     statusDiv.className = 'status error';
                     statusDiv.textContent = `Local function test failed: ${error.message}`;
-                    responseDiv.textContent = 'This is expected if Netlify CLI is not running locally.\n\nTo test locally with Netlify CLI:\n1. Install: npm install -g netlify-cli\n2. Set env var: export GOOGLE_APPLICATION_CREDENTIALS="path/to/service-account.json"\n3. Run: netlify dev';
+                    responseDiv.textContent = 'This is expected if Netlify CLI is not running locally.';
                 });
         }
 
@@ -234,7 +208,7 @@
                         statusDiv.textContent = 'Loading counter...';
                     } else if (value === '-') {
                         statusDiv.className = 'status error';
-                        statusDiv.textContent = 'Counter failed to load (real API not available)';
+                        statusDiv.textContent = 'Counter failed to load';
                     } else {
                         statusDiv.className = 'status success';
                         statusDiv.textContent = `Counter loaded successfully: ${value}`;

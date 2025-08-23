@@ -1,31 +1,21 @@
 // Google Analytics Visit Counter (Fallback Version)
 // This version simulates the API response for testing without requiring GA API setup
 (function() {
-    // Prevent multiple instances
-    if (window.gaCounterInitialized) return;
-    window.gaCounterInitialized = true;
-    
     function updateGACounter() {
         const counterElement = document.getElementById('visit-counter');
-        if (!counterElement) {
-            console.log('GA Counter: No counter element found');
-            return;
-        }
+        if (!counterElement) return;
 
         // Show loading state
         counterElement.textContent = '...';
-        console.log('GA Counter: Setting loading state');
         
         // Simulate API call with a delay
         setTimeout(() => {
             // Simulated data - replace with actual API call
             const mockData = {
-                totalVisits: 1234,
+                totalVisits: 0,
                 last30Days: 56,
                 timestamp: new Date().toISOString()
             };
-            
-            console.log('GA Counter: Updating with mock data:', mockData);
             
             // Update the counter with mock data
             counterElement.textContent = mockData.totalVisits.toLocaleString();
