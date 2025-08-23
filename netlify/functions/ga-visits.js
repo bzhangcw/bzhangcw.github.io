@@ -56,8 +56,11 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    // Your GA4 property ID (from the G-XXXXXXXXXX format)
-    const propertyId = 'G-H06CBKXSEK'.replace('G-', '');
+    // Your GA4 numeric Property ID (NOT the Measurement ID)
+    // Replace this with your actual numeric Property ID from Google Analytics Admin
+    const propertyId = process.env.GA4_PROPERTY_ID || '123456789'; // Replace with your actual Property ID
+    
+    console.log('Using Property ID:', propertyId);
     
     // Get total pageviews (all time)
     const [totalResponse] = await analyticsDataClient.runReport({

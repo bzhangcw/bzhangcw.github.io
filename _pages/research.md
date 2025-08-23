@@ -170,8 +170,8 @@ permalink: /research
       <td style="text-align: left;">
       <strong>Beyond nonconvexity: A universal trust-region method with new analyses</strong><br>
       with C He, Y Jiang, D Ge, B Jiang, and Y Ye</td>
-      <td style="text-align: right;"><span class="publication-year">2023</span><br>
-      Revision<br>
+      <td style="text-align: right;"><span class="publication-year">2023</span>
+      <br>
       <a href="http://arxiv.org/abs/2311.11489">[arXiv]</a></td>
     </tr>
   </table>
