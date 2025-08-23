@@ -37,20 +37,47 @@
     {{ include_to_scssify | scssify }}
   </style>
   
-  <!-- KaTeX CSS and JS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body, 
-  {delimiters: 
-    [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], 
-  throwOnError: false,
-  macros: {'\\R': '\\mathbb{R}'}
- })">
+  <!-- MathJax v3 Configuration -->
+  <!-- <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        macros: {
+          '\\R': '\\mathbb{R}'
+        }
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process'
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
   </script>
-
+  <script id="MathJax-script" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script> -->
+  <script class="show">
+    MathJax = {
+      tex: {inlineMath: {'[+]': [['$', '$']]},
+        displayMath: {'[+]': [['$$', '$$']]},
+        processEnvironments: true,
+        processEscapes: true,
+        processHtmlClass: 'tex2jax_process',
+        ignoreHtmlClass: 'tex2jax_ignore',
+    }
+    };
+    </script>
+    <script class="show" defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+  
+  
   <!-- Google Analytics Visit Counter Script (Real API) -->
   <script src="{{ site.baseurl }}/assets/js/ga-visit-counter.js"></script>
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/visit-counter.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/extras.css">
 
   <!-- Google Analytics -->
   {% if site.google_analytics %}

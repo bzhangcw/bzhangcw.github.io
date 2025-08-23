@@ -37,7 +37,7 @@ pre {
 }
 
 .post p {
-  margin: 0.5rem 0;
+  margin: 0.1rem 0;
 }
 
 .post h1,
@@ -460,20 +460,6 @@ table td {
   vertical-align: middle;
 }
 
-// Post table specific styling
-.post-table {
-  width: 50%;
-  margin: 0.5rem auto;
-  
-  th {
-    text-align: left;
-  }
-  
-  td {
-    text-align: left;
-  }
-}
-
 table tr:hover {
   background-color: #f8f9fa;
   transition: background-color 0.2s ease;
@@ -548,6 +534,8 @@ img {
   user-select: none;
 }
 
+
+
 /* Post figure styling */
 .post-fig {
   width: 30%;
@@ -558,11 +546,24 @@ img {
   padding: 10px;
   background-color: #f9f9f9;
 }
-
-
 /* Award styling */
 .award {
   color: #f97254 !important;
   font-weight: 600 !important;
   font-style: italic !important;
 }
+// Post table specific styling
+.post-table {
+  width: 50%;
+  margin: 0.5rem auto;
+  
+  th {
+    text-align: left;
+  }
+  
+  td {
+    text-align: left;
+  }
+}
+
+

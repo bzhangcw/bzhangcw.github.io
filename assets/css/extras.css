@@ -3,22 +3,168 @@ a[href$=".pdf"]::after {
   content: " (PDF)";
 }
 
-/* Style the blockquotes with a fancy quote character */
-blockquote p:first-child {
-  position: relative;
-}
-
-blockquote p:first-child::before {
-  content: "“";
-  display: block;
-  position: absolute;
-  font-size: 5rem;
-  top: 0.9rem;
-  left: -3.4rem;
-}
-
 /* If the last line is not an attribution line, add an empty
  * <p></p> so that the last paragraph is properly italicized. */
 blockquote *:not(:last-child) {
   font-style: italic;
+}
+
+/* Theorem environments */
+.theorem, .lemma, .corollary, .proposition, .example, .remark, .note {
+  margin: 1rem 0;
+  padding: 0.8rem 1.2rem;
+  border-left: 4px solid #007acc;
+  background-color: #f8f9fa;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+}
+
+.theorem::before, .lemma::before, .corollary::before, .proposition::before, 
+.example::before, .remark::before, .note::before {
+  content: attr(data-label);
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.3rem;
+  color: #007acc;
+}
+
+.theorem[data-number]::before, .lemma[data-number]::before, 
+.corollary[data-number]::before, .proposition[data-number]::before,
+.example[data-number]::before, .remark[data-number]::before, .note[data-number]::before {
+  content: attr(data-label) " " attr(data-number);
+}
+
+/* Custom names for theorem environments */
+.theorem[data-name]::before, .lemma[data-name]::before, 
+.corollary[data-name]::before, .proposition[data-name]::before,
+.example[data-name]::before, .remark[data-name]::before, .note[data-name]::before {
+  content: attr(data-label) " (" attr(data-name) ")";
+}
+
+.theorem[data-number][data-name]::before, .lemma[data-number][data-name]::before, 
+.corollary[data-number][data-name]::before, .proposition[data-number][data-name]::before,
+.example[data-number][data-name]::before, .remark[data-number][data-name]::before, .note[data-number][data-name]::before {
+  content: attr(data-label) " " attr(data-number) " (" attr(data-name) ")";
+}
+
+.theorem-content, .lemma-content, .corollary-content, .proposition-content,
+.example-content, .remark-content, .note-content {
+  margin: 0;
+}
+
+/* Definition environment */
+.definition {
+  margin: 1rem 0;
+  padding: 0.8rem 1.2rem;
+  border-left: 4px solid #6f42c1;
+  background-color: #f8f5ff;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+}
+
+.definition::before {
+  content: attr(data-label);
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.3rem;
+  color: #6f42c1;
+}
+
+.definition[data-number]::before {
+  content: attr(data-label) " " attr(data-number);
+}
+
+.definition[data-name]::before {
+  content: attr(data-label) " (" attr(data-name) ")";
+}
+
+.definition[data-number][data-name]::before {
+  content: attr(data-label) " " attr(data-number) " (" attr(data-name) ")";
+}
+
+.definition-content {
+  margin: 0;
+}
+
+/* Proof environment */
+.proof {
+  margin: 1rem 0;
+  padding: 0.8rem 1.2rem;
+  border-left: 4px solid #28a745;
+  background-color: #f8fff9;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+}
+
+.proof::before {
+  content: "Proof";
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.3rem;
+  color: #28a745;
+}
+
+.proof::after {
+  content: "□";
+  display: block;
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 0.5rem;
+  color: #28a745;
+}
+
+.proof-content {
+  margin: 0;
+}
+
+/* MathJax v4 compatibility for theorem environments */
+.theorem .MathJax, .lemma .MathJax, .corollary .MathJax, .proposition .MathJax,
+.example .MathJax, .remark .MathJax, .note .MathJax {
+  display: inline-block !important;
+  position: relative;
+  z-index: 3;
+}
+
+/* Ensure display math blocks are properly spaced */
+.theorem .MathJax_Display, .lemma .MathJax_Display, 
+.corollary .MathJax_Display, .proposition .MathJax_Display,
+.example .MathJax_Display, .remark .MathJax_Display, 
+.note .MathJax_Display {
+  margin: 1rem 0 !important;
+  text-align: center !important;
+}
+
+/* Ensure math blocks render properly in theorem environments */
+.theorem p, .lemma p, .corollary p, .proposition p,
+.example p, .remark p, .note p {
+  margin: 0.2rem 0;
+  overflow-x: auto;
+  line-height: 1.1rem;
+}
+
+/* Ensure display math blocks are properly spaced */
+.theorem p:has(> .MathJax_Display), .lemma p:has(> .MathJax_Display), 
+.corollary p:has(> .MathJax_Display), .proposition p:has(> .MathJax_Display),
+.example p:has(> .MathJax_Display), .remark p:has(> .MathJax_Display), 
+.note p:has(> .MathJax_Display) {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/* Definition MathJax compatibility */
+.definition .MathJax {
+  display: inline-block !important;
+  position: relative;
+  z-index: 3;
+}
+
+/* Proof MathJax compatibility */
+.proof .MathJax {
+  display: inline-block !important;
+  position: relative;
+  z-index: 3;
 }
