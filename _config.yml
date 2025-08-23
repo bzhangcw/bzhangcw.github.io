@@ -6,7 +6,7 @@ email: bzhangcw@github.com
 description: >- # this means to ignore newlines until "baseurl:"
   bzhangcw.io
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://bzhangcw.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: bzhangcw
 
 # Google Analytics
@@ -16,10 +16,8 @@ highlighter: rouge
 
 exclude:
   - .jekyll-cache
-
-compress_html:
-  clippings: all
-  comments: ["<!-- ", " -->"]
+  - netlify
+  - howto
 
 markdown: kramdown
 kramdown:
@@ -32,6 +30,7 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
 
 collections:
   pages:
