@@ -6,15 +6,26 @@ let analyticsDataClient;
 try {
   if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
     // Use environment variable (preferred method)
-    const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    console.log('Using GOOGLE_APPLICATION_CREDENTIALS environment variable');
+    try {
+      const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+      console.log('Successfully parsed credentials, client_email:', credentials.client_email);
+      analyticsDataClient = new BetaAnalyticsDataClient({
+        credentials: credentials
+      });
+    } catch (parseError) {
+      console.error('Error parsing GOOGLE_APPLICATION_CREDENTIALS:', parseError);
+      throw new Error('Invalid JSON in GOOGLE_APPLICATION_CREDENTIALS: ' + parseError.message);
+    }
+  } else if (process.env.GOOGLE_APPLICATION_CREDENTIALS_FILE) {
+    // Use file path if specified
+    console.log('Using GOOGLE_APPLICATION_CREDENTIALS_FILE:', process.env.GOOGLE_APPLICATION_CREDENTIALS_FILE);
     analyticsDataClient = new BetaAnalyticsDataClient({
-      credentials: credentials
+      keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS_FILE
     });
   } else {
-    // Fallback to file (for local development)
-    analyticsDataClient = new BetaAnalyticsDataClient({
-      keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS_FILE || 'service-account-key.json',
-    });
+    // No credentials available
+    throw new Error('No Google Analytics credentials found. Please set GOOGLE_APPLICATION_CREDENTIALS environment variable.');
   }
 } catch (error) {
   console.error('Error initializing Analytics client:', error);
@@ -22,6 +33,11 @@ try {
 }
 
 exports.handler = async function(event, context) {
+  // Debug environment variables
+  console.log('Environment variables check:');
+  console.log('GOOGLE_APPLICATION_CREDENTIALS exists:', !!process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  console.log('GOOGLE_APPLICATION_CREDENTIALS_FILE exists:', !!process.env.GOOGLE_APPLICATION_CREDENTIALS_FILE);
+  
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
