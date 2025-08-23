@@ -1,9 +1,25 @@
 const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 
 // Initialize the Analytics Data API client
-const analyticsDataClient = new BetaAnalyticsDataClient({
-  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS || 'service-account-key.json',
-});
+let analyticsDataClient;
+
+try {
+  if (process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    // Use environment variable (preferred method)
+    const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    analyticsDataClient = new BetaAnalyticsDataClient({
+      credentials: credentials
+    });
+  } else {
+    // Fallback to file (for local development)
+    analyticsDataClient = new BetaAnalyticsDataClient({
+      keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS_FILE || 'service-account-key.json',
+    });
+  }
+} catch (error) {
+  console.error('Error initializing Analytics client:', error);
+  throw new Error('Failed to initialize Google Analytics client: ' + error.message);
+}
 
 exports.handler = async function(event, context) {
   // Enable CORS

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA Integration Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        .code { background-color: #f8f9fa; padding: 10px; border-radius: 4px; font-family: monospace; }
+        .button-group { margin: 10px 0; }
+        button { margin: 5px; padding: 8px 16px; cursor: pointer; }
+        .deployment-info { background-color: #e2e3e5; padding: 15px; border-radius: 4px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Google Analytics Integration Test</h1>
+    
+    <div class="test-section">
+        <h2>Current Setup Status</h2>
+        <div id="setup-status" class="status info">Analyzing setup...</div>
+        <div class="code" id="setup-details"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Footer Counter Test</h2>
+        <p>Check the footer below for the visit counter:</p>
+        <div id="footer-test">
+            <p>pageviews: <span id="visit-counter">...</span></p>
+        </div>
+        <div id="counter-status" class="status info">Loading...</div>
+        <div class="button-group">
+            <button onclick="switchToRealAPI()">Switch to Real API</button>
+            <button onclick="switchToFallback()">Switch to Fallback</button>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>API Endpoint Test</h2>
+        <div class="deployment-info">
+            <strong>⚠️ Important:</strong> The real API endpoints only work when deployed to Netlify, not locally.
+            <br><br>
+            <strong>To test the real API:</strong>
+            <ol>
+                <li>Deploy this site to Netlify</li>
+                <li>Set up environment variables in Netlify dashboard</li>
+                <li>Test on the deployed site URL</li>
+            </ol>
+        </div>
+        <div class="button-group">
+            <button onclick="testAPI()">Test /api/ga-visits Endpoint</button>
+            <button onclick="testAPILocal()">Test Local Function (if available)</button>
+        </div>
+        <div id="api-status" class="status info">Click button to test</div>
+        <pre id="api-response"></pre>
+    </div>
+
+    <div class="test-section">
+        <h2>Local vs Deployed Testing</h2>
+        <div class="status warning">
+            <strong>Current Environment:</strong> <span id="environment-info">...</span>
+            <br><br>
+            <strong>What works locally:</strong>
+            <ul>
+                <li>✅ Fallback script (shows simulated data)</li>
+                <li>✅ Counter functionality</li>
+                <li>❌ Real API endpoints (404 errors expected)</li>
+            </ul>
+            <br>
+            <strong>What works on Netlify:</strong>
+            <ul>
+                <li>✅ Real API endpoints</li>
+                <li>✅ Actual Google Analytics data</li>
+                <li>✅ Serverless functions</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Next Steps for Real API</h2>
+        <ol>
+            <li><strong>Deploy to Netlify:</strong> Push your code to GitHub and connect to Netlify</li>
+            <li><strong>Set Environment Variables:</strong> In Netlify dashboard, add:
+                <div class="code">
+                    GOOGLE_APPLICATION_CREDENTIALS = [contents of service account JSON]
+                </div>
+            </li>
+            <li><strong>Test on Deployed Site:</strong> Visit your Netlify URL and test the API</li>
+            <li><strong>Switch to Real API:</strong> Use the "Switch to Real API" button above</li>
+        </ol>
+    </div>
+
+    <script src="../assets/js/ga-visit-counter-fallback.js"></script>
+    <script>
+        // Analyze current setup
+        function analyzeSetup() {
+            const details = [];
+            const statusDiv = document.getElementById('setup-status');
+            const detailsDiv = document.getElementById('setup-details');
+            const envInfo = document.getElementById('environment-info');
+            
+            // Check if we're on localhost
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            if (isLocal) {
+                details.push('📍 Running locally - API endpoint will not work');
+                statusDiv.className = 'status warning';
+                statusDiv.textContent = 'Local Development Mode';
+                envInfo.textContent = 'Local Development (localhost)';
+            } else {
+                details.push('✅ Running on deployed site');
+                statusDiv.className = 'status success';
+                statusDiv.textContent = 'Deployed Environment';
+                envInfo.textContent = 'Deployed Site (' + window.location.hostname + ')';
+            }
+            
+            // Check current script
+            const scripts = document.querySelectorAll('script[src*="ga-visit-counter"]');
+            if (scripts.length > 0) {
+                const scriptSrc = scripts[0].src;
+                if (scriptSrc.includes('fallback')) {
+                    details.push('⚠️ Using fallback script (simulated data)');
+                } else {
+                    details.push('✅ Using real GA API script');
+                }
+            }
+            
+            // Check for service account file
+            details.push('🔍 Service account file: howto/sigma-crawler-351008-cff379b5231b.json');
+            
+            detailsDiv.innerHTML = details.map(d => `<div>${d}</div>`).join('');
+        }
+
+        function switchToRealAPI() {
+            // Remove fallback script
+            const fallbackScript = document.querySelector('script[src*="ga-visit-counter-fallback.js"]');
+            if (fallbackScript) {
+                fallbackScript.remove();
+            }
+            
+            // Add real API script
+            const realScript = document.createElement('script');
+            realScript.src = '../assets/js/ga-visit-counter.js';
+            document.head.appendChild(realScript);
+            
+            // Update status
+            document.getElementById('counter-status').className = 'status info';
+            document.getElementById('counter-status').textContent = 'Switched to real API - check counter above';
+        }
+
+        function switchToFallback() {
+            // Remove real script
+            const realScript = document.querySelector('script[src*="ga-visit-counter.js"]');
+            if (realScript) {
+                realScript.remove();
+            }
+            
+            // Add fallback script
+            const fallbackScript = document.createElement('script');
+            fallbackScript.src = '../assets/js/ga-visit-counter-fallback.js';
+            document.head.appendChild(fallbackScript);
+            
+            // Update status
+            document.getElementById('counter-status').className = 'status info';
+            document.getElementById('counter-status').textContent = 'Switched to fallback - check counter above';
+        }
+
+        function testAPI() {
+            const statusDiv = document.getElementById('api-status');
+            const responseDiv = document.getElementById('api-response');
+            
+            statusDiv.className = 'status info';
+            statusDiv.textContent = 'Testing API endpoint...';
+            
+            fetch('/api/ga-visits')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = 'API endpoint working!';
+                    responseDiv.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    statusDiv.className = 'status error';
+                    statusDiv.textContent = `API test failed: ${error.message}`;
+                    responseDiv.textContent = 'This is expected when running locally.\n\nTo test the real API:\n1. Deploy to Netlify\n2. Set up environment variables\n3. Test on the deployed site';
+                });
+        }
+
+        function testAPILocal() {
+            const statusDiv = document.getElementById('api-status');
+            const responseDiv = document.getElementById('api-response');
+            
+            statusDiv.className = 'status info';
+            statusDiv.textContent = 'Testing local function (if Netlify CLI is running)...';
+            
+            fetch('/.netlify/functions/ga-visits')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    statusDiv.className = 'status success';
+                    statusDiv.textContent = 'Local function working!';
+                    responseDiv.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    statusDiv.className = 'status error';
+                    statusDiv.textContent = `Local function test failed: ${error.message}`;
+                    responseDiv.textContent = 'This is expected if Netlify CLI is not running locally.\n\nTo test locally with Netlify CLI:\n1. Install: npm install -g netlify-cli\n2. Set env var: export GOOGLE_APPLICATION_CREDENTIALS="path/to/service-account.json"\n3. Run: netlify dev';
+                });
+        }
+
+        // Monitor counter updates
+        const counterElement = document.getElementById('visit-counter');
+        const statusDiv = document.getElementById('counter-status');
+        
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                    const value = counterElement.textContent;
+                    if (value === '...') {
+                        statusDiv.className = 'status info';
+                        statusDiv.textContent = 'Loading counter...';
+                    } else if (value === '-') {
+                        statusDiv.className = 'status error';
+                        statusDiv.textContent = 'Counter failed to load (real API not available)';
+                    } else {
+                        statusDiv.className = 'status success';
+                        statusDiv.textContent = `Counter loaded successfully: ${value}`;
+                    }
+                }
+            });
+        });
+        
+        observer.observe(counterElement, {
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+
+        // Initialize
+        analyzeSetup();
+    </script>
+</body>
+</html> 

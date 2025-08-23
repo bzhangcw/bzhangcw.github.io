@@ -22,4 +22,3 @@ blockquote p:first-child::before {
 blockquote *:not(:last-child) {
   font-style: italic;
 }
-

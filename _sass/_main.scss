@@ -432,27 +432,66 @@ figcaption {
   text-align: center;
 }
 
-// tables, from pandoc
+// Enhanced table styling
 table {
-  margin-bottom: 2em;
-  // border-bottom: 1px solid #ddd;
-  // border-right: 1px solid #ddd;
-  border-spacing: 0;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
   border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 table th {
-  padding: 0.2em 1em;
-  // background-color: #eee;
-  // border-top: 1px solid #ddd;
-  // border-left: 1px solid #ddd;
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 0.95rem;
 }
 
 table td {
-  padding: 0.2em 1em;
-  // border-top: 1px solid #ddd;
-  // border-left: 1px solid #ddd;
-  vertical-align: top;
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+  vertical-align: middle;
+}
+
+// Post table specific styling
+.post-table {
+  width: 50%;
+  margin: 1.5rem auto;
+  
+  th {
+    text-align: left;
+  }
+  
+  td {
+    text-align: left;
+  }
+}
+
+table tr:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+// Responsive table
+@media (max-width: 768px) {
+  table {
+    font-size: 0.8rem;
+  }
+  
+  table th, table td {
+    padding: 8px 12px;
+  }
 }
 
 // listings
