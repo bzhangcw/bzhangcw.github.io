@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA Data Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        button { margin: 5px; padding: 8px 16px; cursor: pointer; }
+        .data-display { background-color: #f8f9fa; padding: 15px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Google Analytics Data Debug</h1>
+    
+    <div class="test-section">
+        <h2>Test GA Data</h2>
+        <button onclick="testGAData()">Fetch GA Data</button>
+        <div id="status" class="status info">Click button to test</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Data Results</h2>
+        <div id="results" class="data-display">No data yet</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Common Issues & Solutions</h2>
+        <div class="status warning">
+            <strong>Why pageviews might be 0:</strong><br><br>
+            
+            <strong>1. No Data in GA4:</strong><br>
+            - Your site might not have any pageview data yet<br>
+            - Check if GA4 tracking is working on your site<br>
+            - Visit your site a few times to generate data<br><br>
+            
+            <strong>2. Wrong Property ID:</strong><br>
+            - Make sure you're using the correct GA4 Property ID<br>
+            - Check if you have multiple GA4 properties<br><br>
+            
+            <strong>3. Date Range Issue:</strong><br>
+            - GA4 might not have data for the requested date range<br>
+            - Try different date ranges<br><br>
+            
+            <strong>4. Permission Issue:</strong><br>
+            - Service account might not have access to the property<br>
+            - Check GA4 Admin → Property access management<br><br>
+            
+            <strong>5. Data Processing Delay:</strong><br>
+            - GA4 can take 24-48 hours to process data<br>
+            - Recent visits might not appear immediately
+        </div>
+    </div>
+
+    <script>
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+
+        function updateResults(data) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <strong>API Response:</strong><br>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+                
+                <br><strong>Summary:</strong><br>
+                • Total Page Views: ${data.totalVisits}<br>
+                • Total Users: ${data.totalUsers}<br>
+                • Total Sessions: ${data.totalSessions}<br>
+                • Recent Page Views (7 days): ${data.recentPageViews}<br>
+                • Recent Users (7 days): ${data.recentUsers}<br>
+                • Recent Sessions (7 days): ${data.recentSessions}<br>
+                • Today Page Views: ${data.todayPageViews}<br>
+                
+                <br><strong>Debug Info:</strong><br>
+                • Property ID: ${data.debug.propertyId}<br>
+                • Has Recent Data: ${data.debug.hasRecentData}<br>
+                • Has Total Data: ${data.debug.hasTotalData}<br>
+                • Has Today Data: ${data.debug.hasTodayData}<br>
+            `;
+        }
+
+        function testGAData() {
+            updateStatus('Fetching GA data...', 'info');
+            
+            fetch('/api/ga-visits')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    updateStatus('Data fetched successfully!', 'success');
+                    updateResults(data);
+                    
+                    // Analyze the results
+                    if (data.totalVisits === 0 && data.totalUsers === 0) {
+                        updateStatus('⚠️ No data found - check GA4 setup', 'warning');
+                    } else if (data.totalVisits > 0) {
+                        updateStatus('✅ Data found!', 'success');
+                    }
+                })
+                .catch(error => {
+                    updateStatus(`Error: ${error.message}`, 'error');
+                    document.getElementById('results').innerHTML = `
+                        <strong>Error:</strong><br>
+                        <pre>${error.message}</pre>
+                    `;
+                });
+        }
+    </script>
+</body>
+</html> 

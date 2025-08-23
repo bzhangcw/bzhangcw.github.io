@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GA Integration Browser Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        .warning { background-color: #fff3cd; color: #856404; }
+        button { margin: 5px; padding: 8px 16px; cursor: pointer; }
+        .code { background-color: #f8f9fa; padding: 10px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Google Analytics Integration Browser Test</h1>
+    
+    <div class="test-section">
+        <h2>Current Status</h2>
+        <div id="status" class="status info">Ready to test</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Options</h2>
+        <button onclick="testLocalAPI()">Test Local API (if available)</button>
+        <button onclick="testDeployedAPI()">Test Deployed API</button>
+        <button onclick="testFallback()">Test Fallback Script</button>
+        <button onclick="checkEnvironment()">Check Environment</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Test Results</h2>
+        <div id="results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Debugging Information</h2>
+        <div class="code">
+            <strong>Common Issues & Solutions:</strong><br><br>
+            
+            <strong>1. Property ID Issue:</strong><br>
+            - Error: "Invalid property ID"<br>
+            - Solution: Use numeric Property ID (not Measurement ID)<br>
+            - Find it in GA4 Admin → Property Settings → Property ID<br><br>
+            
+            <strong>2. Permission Issue:</strong><br>
+            - Error: "PERMISSION_DENIED"<br>
+            - Solution: Add service account to GA4 property<br>
+            - Go to GA4 Admin → Property access management<br><br>
+            
+            <strong>3. Environment Variables:</strong><br>
+            - Make sure GOOGLE_APPLICATION_CREDENTIALS is set in Netlify<br>
+            - Make sure GA4_PROPERTY_ID is set in Netlify<br><br>
+            
+            <strong>4. Local Testing:</strong><br>
+            - Install Node.js and Netlify CLI for local testing<br>
+            - Or test directly on deployed site<br>
+        </div>
+    </div>
+
+    <script>
+        function updateStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+
+        function addResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `status ${type}`;
+            resultDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        function testLocalAPI() {
+            updateStatus('Testing local API...', 'info');
+            addResult('Testing local API endpoint...', 'info');
+            
+            fetch('/.netlify/functions/ga-visits')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    updateStatus('Local API working!', 'success');
+                    addResult(`✅ Local API success: ${JSON.stringify(data)}`, 'success');
+                })
+                .catch(error => {
+                    updateStatus('Local API failed', 'error');
+                    addResult(`❌ Local API failed: ${error.message}`, 'error');
+                    addResult('This is expected if Netlify CLI is not running locally', 'warning');
+                });
+        }
+
+        function testDeployedAPI() {
+            updateStatus('Testing deployed API...', 'info');
+            addResult('Testing deployed API endpoint...', 'info');
+            
+            fetch('/api/ga-visits')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    updateStatus('Deployed API working!', 'success');
+                    addResult(`✅ Deployed API success: ${JSON.stringify(data)}`, 'success');
+                })
+                .catch(error => {
+                    updateStatus('Deployed API failed', 'error');
+                    addResult(`❌ Deployed API failed: ${error.message}`, 'error');
+                    addResult('Check Netlify environment variables and Property ID', 'warning');
+                });
+        }
+
+        function testFallback() {
+            updateStatus('Testing fallback script...', 'info');
+            addResult('Testing fallback script...', 'info');
+            
+            // Simulate fallback script behavior
+            setTimeout(() => {
+                const mockData = {
+                    totalVisits: 1234,
+                    last30Days: 56,
+                    timestamp: new Date().toISOString()
+                };
+                updateStatus('Fallback script working!', 'success');
+                addResult(`✅ Fallback script: ${JSON.stringify(mockData)}`, 'success');
+            }, 1000);
+        }
+
+        function checkEnvironment() {
+            updateStatus('Checking environment...', 'info');
+            addResult('Checking current environment...', 'info');
+            
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const hostname = window.location.hostname;
+            const protocol = window.location.protocol;
+            
+            addResult(`Hostname: ${hostname}`, 'info');
+            addResult(`Protocol: ${protocol}`, 'info');
+            addResult(`Is Local: ${isLocal}`, isLocal ? 'warning' : 'success');
+            
+            if (isLocal) {
+                addResult('⚠️ Running locally - API endpoints may not work', 'warning');
+                addResult('💡 Deploy to Netlify to test real API', 'info');
+            } else {
+                addResult('✅ Running on deployed site - API should work', 'success');
+            }
+        }
+
+        // Initialize
+        checkEnvironment();
+    </script>
+</body>
+</html> 

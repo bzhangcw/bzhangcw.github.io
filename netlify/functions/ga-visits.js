@@ -62,47 +62,89 @@ exports.handler = async function(event, context) {
     
     console.log('Using Property ID:', propertyId);
     
-    // Get total pageviews (all time)
+    // Test multiple metrics to see what data is available
+    console.log('Testing different metrics and date ranges...');
+    
+    // Test 1: Recent data (last 7 days)
+    const [recentResponse] = await analyticsDataClient.runReport({
+      property: `properties/${propertyId}`,
+      dateRanges: [
+        {
+          startDate: '7daysAgo',
+          endDate: 'today',
+        },
+      ],
+      metrics: [
+        { name: 'screenPageViews' },
+        { name: 'totalUsers' },
+        { name: 'sessions' },
+      ],
+    });
+    
+    console.log('Recent response:', JSON.stringify(recentResponse, null, 2));
+    
+    // Test 2: All time data
     const [totalResponse] = await analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [
         {
-          startDate: '2020-01-01', // Start from a reasonable date
+          startDate: '2020-01-01',
           endDate: 'today',
         },
       ],
       metrics: [
-        {
-          name: 'screenPageViews',
-        },
+        { name: 'screenPageViews' },
+        { name: 'totalUsers' },
+        { name: 'sessions' },
       ],
     });
-
-    // Get last 30 days pageviews
-    const [last30DaysResponse] = await analyticsDataClient.runReport({
+    
+    console.log('Total response:', JSON.stringify(totalResponse, null, 2));
+    
+    // Test 3: Try different date format
+    const [todayResponse] = await analyticsDataClient.runReport({
       property: `properties/${propertyId}`,
       dateRanges: [
         {
-          startDate: '30daysAgo',
+          startDate: 'today',
           endDate: 'today',
         },
       ],
       metrics: [
-        {
-          name: 'screenPageViews',
-        },
+        { name: 'screenPageViews' },
       ],
     });
+    
+    console.log('Today response:', JSON.stringify(todayResponse, null, 2));
 
+    // Extract values with better error handling
+    const recentPageViews = recentResponse.rows?.[0]?.metricValues?.[0]?.value || 0;
+    const recentUsers = recentResponse.rows?.[0]?.metricValues?.[1]?.value || 0;
+    const recentSessions = recentResponse.rows?.[0]?.metricValues?.[2]?.value || 0;
+    
     const totalVisits = totalResponse.rows?.[0]?.metricValues?.[0]?.value || 0;
-    const last30Days = last30DaysResponse.rows?.[0]?.metricValues?.[0]?.value || 0;
+    const totalUsers = totalResponse.rows?.[0]?.metricValues?.[1]?.value || 0;
+    const totalSessions = totalResponse.rows?.[0]?.metricValues?.[2]?.value || 0;
+    
+    const todayPageViews = todayResponse.rows?.[0]?.metricValues?.[0]?.value || 0;
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         totalVisits: parseInt(totalVisits),
-        last30Days: parseInt(last30Days),
+        totalUsers: parseInt(totalUsers),
+        totalSessions: parseInt(totalSessions),
+        recentPageViews: parseInt(recentPageViews),
+        recentUsers: parseInt(recentUsers),
+        recentSessions: parseInt(recentSessions),
+        todayPageViews: parseInt(todayPageViews),
+        debug: {
+          propertyId: propertyId,
+          hasRecentData: recentResponse.rows && recentResponse.rows.length > 0,
+          hasTotalData: totalResponse.rows && totalResponse.rows.length > 0,
+          hasTodayData: todayResponse.rows && todayResponse.rows.length > 0,
+        },
         timestamp: new Date().toISOString(),
       }),
     };
