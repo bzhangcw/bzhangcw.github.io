@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.3" # ensure this matches .ruby-version / Netlify env RUBY_VERSION
+ruby "3.2.2" # ensure this matches .ruby-version / Netlify env RUBY_VERSION
 
 gem "jekyll", "~> 4.3.3"
 # Default-stdlib gems that some CI envs require explicitly:
