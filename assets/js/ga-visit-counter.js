@@ -17,8 +17,11 @@
             })
             .then(data => {
                 // Update the counter with GA data
-                counterElement.textContent = data.totalVisits.toLocaleString();
-                counterElement.title = `Total pageviews: ${data.totalVisits.toLocaleString()}\nLast 30 days: ${data.last30Days.toLocaleString()}`;
+                const totalVisits = data.totalVisits || 0;
+                const recentPageViews = data.recentPageViews || 0;
+                
+                counterElement.textContent = totalVisits.toLocaleString();
+                counterElement.title = `Total pageviews: ${totalVisits.toLocaleString()}\nLast 7 days: ${recentPageViews.toLocaleString()}`;
             })
             .catch(error => {
                 console.error('Error fetching GA data:', error);
