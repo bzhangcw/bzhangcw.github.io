@@ -1,0 +1,23 @@
+/* Visit counter styles */
+#visit-counter {
+    font-weight: bold;
+    color: #007acc;
+    cursor: help;
+    transition: color 0.3s ease;
+}
+
+#visit-counter:hover {
+    color: #005a9e;
+}
+
+/* Optional: Add a small icon */
+.visit-counter-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.visit-counter-wrapper::before {
+    content: "👁";
+    font-size: 0.9em;
+} 

@@ -1,0 +1,12 @@
+{
+  "name": "ga-visits-function",
+  "version": "1.0.0",
+  "description": "Netlify function to fetch Google Analytics data",
+  "main": "ga-visits.js",
+  "dependencies": {
+    "@google-analytics/data": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

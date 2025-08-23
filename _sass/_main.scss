@@ -129,6 +129,104 @@ h5 {
   font-weight: 600;
 }
 
+// Make post titles much larger than regular h1 elements
+.post h1.post-title {
+  font-size: 2.5rem !important;
+  font-style: italic !important;
+  font-weight: 700 !important;
+  margin-bottom: 2rem !important;
+  color: #0f2c52 !important;
+}
+
+// Auto-number headings in posts
+.post {
+  counter-reset: h1-counter h2-counter h3-counter h4-counter h5-counter h6-counter;
+
+  // Explicitly exclude post-title from numbering
+  h1.post-title {
+    counter-increment: none;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  // Exclude subtitle from numbering
+  h3:first-of-type {
+    counter-increment: none;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  // Only number h1 elements that are NOT post titles
+  h1:not(.post-title) {
+    counter-increment: h1-counter;
+    counter-reset: h2-counter h3-counter h4-counter h5-counter h6-counter;
+
+    &::before {
+      content: counter(h1-counter) ". ";
+      color: #0f2c52;
+      font-weight: bold;
+    }
+  }
+
+  h2 {
+    counter-increment: h2-counter;
+    counter-reset: h3-counter h4-counter h5-counter h6-counter;
+
+    &::before {
+      content: counter(h1-counter) "." counter(h2-counter) ". ";
+      color: #0f2c52;
+      font-weight: bold;
+    }
+  }
+
+  h3 {
+    counter-increment: h3-counter;
+    counter-reset: h4-counter h5-counter h6-counter;
+
+    &::before {
+      content: counter(h1-counter) "." counter(h2-counter) "." counter(h3-counter) ". ";
+      color: #0f2c52;
+      font-weight: bold;
+    }
+  }
+
+  h4 {
+    counter-increment: h4-counter;
+    counter-reset: h5-counter h6-counter;
+
+    &::before {
+      content: counter(h1-counter) "." counter(h2-counter) "." counter(h3-counter) "." counter(h4-counter) ". ";
+      color: #0f2c52;
+      font-weight: bold;
+    }
+  }
+
+  h5 {
+    counter-increment: h5-counter;
+    counter-reset: h6-counter;
+
+    &::before {
+      content: counter(h1-counter) "." counter(h2-counter) "." counter(h3-counter) "." counter(h4-counter) "." counter(h5-counter) ". ";
+      color: #0f2c52;
+      font-weight: bold;
+    }
+  }
+
+  h6 {
+    counter-increment: h6-counter;
+
+    &::before {
+      content: counter(h1-counter) "." counter(h2-counter) "." counter(h3-counter) "." counter(h4-counter) "." counter(h5-counter) "." counter(h6-counter) ". ";
+      color: #0f2c52;
+      font-weight: bold;
+    }
+  }
+}
+
 section h1:first-child {
   margin-top: 0;
 }
@@ -322,7 +420,7 @@ figcaption {
 
 // KaTeX macros
 .katex {
-  font-size: 1em !important;
+  font-size: 1.2em !important;
 }
 
 .cns-large {
@@ -409,6 +507,17 @@ img {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Post figure styling */
+.post-fig {
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9;
 }
 
 

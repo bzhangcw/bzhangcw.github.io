@@ -28,37 +28,33 @@
   <link rel="shortcut icon" href="{{ site.baseurl }}/assets/favicon.svg" type="image/svg+xml">
 
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.baseurl }}/atom.xml">
-  <link rel="alternate" type="application/json" title="{{ site.title }}"
-    href="{{ "/feed.json" | prepend: site.baseurl | prepend: site.url }}" />
+  <link rel="alternate" type="application/json" title="{{ site.title }}" href="{{ "/feed.json" | prepend: site.baseurl | prepend: site.url }}" />
   <link rel="sitemap" type="application/xml" title="sitemap" href="{{ site.baseurl }}/sitemap.xml" />
   <style>
     {% capture include_to_scssify %}
-      {% include inline.scss %}
+    {% include inline.scss %}
     {% endcapture %}
     {{ include_to_scssify | scssify }}
   </style>
-  <script>document.addEventListener("DOMContentLoaded", function () {
-      var mathElements = document.getElementsByClassName("math");
-      for (var i = 0; i < mathElements.length; i++) {
-        var texText = mathElements[i].firstChild;
-        if (mathElements[i].tagName == "SPAN") {
-          katex.render(texText.data, mathElements[i], {
-            displayMode: mathElements[i].classList.contains('display'),
-            throwOnError: false,
-            fleqn: false
-          });
-        }
-      }
-    });
+  
+  <!-- KaTeX CSS and JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js" integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh" crossorigin="anonymous" onload="renderMathInElement(document.body, 
+  {delimiters: 
+    [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}], 
+  throwOnError: false,
+  macros: {'\\R': '\\mathbb{R}'}
+ })">
   </script>
-  <!-- katex markdown -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
-    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
-    crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
-    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
-    crossorigin="anonymous", onload='renderMathInElement(document.body, {delimiters: [{ left: "$$", right: "$$", display: true },{ left: "$", right: "$", display: false, inline: true},{ left: "\\(", right: "\\)", display: false },{ left: "\\[", right: "\\]", display: true }]})'></script>
+
+  <!-- Google Analytics Visit Counter Script (Fallback for testing) -->
+  <script src="{{ site.baseurl }}/assets/js/ga-visit-counter-fallback.js"></script>
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/visit-counter.css">
+
+  <!-- Google Analytics -->
+  {% if site.google_analytics %}
+    {% include google-analytics.html %}
+  {% endif %}
 
 </head>

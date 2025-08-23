@@ -13,6 +13,7 @@ permalink: /research
       <td style="text-align: right;"><span class="publication-year">2025</span>
       <br>
       <a href="https://arxiv.org/abs/2508.04822">[arXiv]</a>
+      <a href="https://drive.google.com/file/d/1K5C3Mb6L54u5zKcbQjemngHerl4wMX02/view?usp=sharing">[slides]</a>
       </td>
     </tr>
   </table>
@@ -85,8 +86,7 @@ permalink: /research
       with K Liang, J Liu, D Ge, Z Wang</td>
       <td style="text-align: right;"><span class="publication-year">2025</span>
       <br>
-      <!-- <a href="http://arxiv.org/abs/2211.08212">[SSRN]</a> -->
-      in preparation
+      <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5391463">[SSRN]</a>
       </td>
     </tr>
   </table>
@@ -107,8 +107,6 @@ permalink: /research
       <a href="https://doi.org/10.1007/s10107-025-02230-3">Math. Prog.</a><br>
       <a href="https://doi.org/10.48550/arXiv.2306.17516">[arXiv]</a><a href="/assets/pdfs/bisection.pdf">[suppl. report]</a><a href="https://web.stanford.edu/class/msande314/lecture16OPTMLDS">[slides]</a></td>
     </tr>
-    
-    
   </table>
   <div class="publication-tags">
     <span>2025</span><span>nonlinear-programming</span>
@@ -234,8 +232,10 @@ permalink: /research
 <div class="publication-item">
   <table>
     <tr>
-      <td><strong>DRSOM: A dimension reduced second-order method.</strong><br>
-      with C He, Y Jiang, D Ge, B Jiang, and Y Ye</td>
+      <td><strong>DRSOM: A dimension reduced second-order method.</strong>
+      <br>with C He, Y Jiang, D Ge, B Jiang, and Y Ye
+      <br><span class="award">Spotlight @<a href="https://neurips.cc/virtual/2022/workshop/50003">"Order up! The Benefits of Higher-Order Optimization in Machine Learning"</a> NeurIPS workshop, 2022, New Orleans.</span>
+      </td>
       <td style="text-align: right;"><span class="publication-year">2022</span><br>
       <a href="http://arxiv.org/abs/2208.00208">[arXiv]</a><a href="https://github.com/bzhangcw/DRSOM.jl">[GitHub]</a></td>
     </tr>

@@ -1,0 +1,42 @@
+<!-- Analytics Consent Banner -->
+<div id="analytics-consent" style="display: none; position: fixed; bottom: 20px; right: 20px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 15px; max-width: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000;">
+  <p style="margin: 0 0 10px 0; font-size: 14px;">This site uses cookies to analyze traffic. Your data is anonymous.</p>
+  <div style="display: flex; gap: 10px;">
+    <button onclick="acceptAnalytics()" style="background: #007acc; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px;">Accept</button>
+    <button onclick="declineAnalytics()" style="background: #6c757d; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px;">Decline</button>
+  </div>
+</div>
+
+<script>
+// Check if user has already made a choice
+if (!localStorage.getItem('analytics-consent')) {
+  document.getElementById('analytics-consent').style.display = 'block';
+}
+
+function acceptAnalytics() {
+  localStorage.setItem('analytics-consent', 'accepted');
+  document.getElementById('analytics-consent').style.display = 'none';
+  // Load Google Analytics
+  loadGoogleAnalytics();
+}
+
+function declineAnalytics() {
+  localStorage.setItem('analytics-consent', 'declined');
+  document.getElementById('analytics-consent').style.display = 'none';
+}
+
+function loadGoogleAnalytics() {
+  // Only load if consent was given
+  if (localStorage.getItem('analytics-consent') === 'accepted') {
+    // Google Analytics will be loaded here
+    console.log('Analytics enabled');
+  }
+}
+
+// Load analytics on page load if consent was previously given
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('analytics-consent') === 'accepted') {
+    loadGoogleAnalytics();
+  }
+});
+</script> 
